@@ -6,9 +6,9 @@ export default (phase, { defaultConfig }) => {
   if (env === "production") {
     return {
       // output: "export",
-      assetPrefix: `/ccohen2/clue_llm/ui`,
-      basePath: `/ccohen2/clue_llm/ui`,
-      distDir: "../ui",
+      // assetPrefix: `/ccohen2/clue_llm/ui`,
+      // basePath: `/ccohen2/clue_llm/ui`,
+      // distDir: "../ui",
     };
   } else {
     return {
