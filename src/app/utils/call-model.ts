@@ -2,10 +2,10 @@ import { OpenAI } from "openai";
 import { Message } from "@/app/interfaces/message";
 import { LLM } from "@/app/interfaces/llm";
 
-const clientOpenAI = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
+// const clientOpenAI = new OpenAI({
+//   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+//   dangerouslyAllowBrowser: true,
+// });
 
 async function chatOpenAI(chatLog: any, setChatLog: Function) {
   let returnMessage;
@@ -22,24 +22,24 @@ async function chatOpenAI(chatLog: any, setChatLog: Function) {
   //     returnMessage = "An error occured."
   // }
 
-  const response = await clientOpenAI.chat.completions.create({
-    messages: chatLog,
-    model: "gpt-4o",
-  });
+  // const response = await clientOpenAI.chat.completions.create({
+  //   messages: chatLog,
+  //   model: "gpt-4o",
+  // });
 
-  if (response) {
-    returnMessage = response.choices[0].message.content;
-  } else {
-    returnMessage = "An error occured.";
-  }
+  // if (response) {
+  //   returnMessage = response.choices[0].message.content;
+  // } else {
+  //   returnMessage = "An error occured.";
+  // }
 
-  setChatLog([
-    ...chatLog,
-    {
-      role: "assistant",
-      content: returnMessage,
-    },
-  ]);
+  // setChatLog([
+  //   ...chatLog,
+  //   {
+  //     role: "assistant",
+  //     content: returnMessage,
+  //   },
+  // ]);
 }
 
 export function callModel(
