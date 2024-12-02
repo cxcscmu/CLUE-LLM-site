@@ -56,7 +56,6 @@ export function callModel(
       content: message,
     },
   ];
-  
 
   switch (LLM) {
     case "gpt-4o":
