@@ -8,8 +8,8 @@ import { handleClientScriptLoad } from "next/script";
 export const Selector: FC<{
   LLM: string;
   setLLM: Function;
-  chatLog: Message[];
-}> = ({ LLM, setLLM, chatLog }) => {
+  // chatLog: Message[];
+}> = ({ LLM, setLLM }) => {
   const handleRandomize = () => {
     const randIndex = Math.floor(Math.random() * implementedModels.length);
     setLLM(implementedModels[randIndex].value);
@@ -27,7 +27,7 @@ export const Selector: FC<{
                     dark:bg-zinc-100 dark:border-zinc-200 dark:text-zinc-900 dark:focus:ring-blue-500 dark:focus:border-blue-500
                     disabled:bg-zinc-500 disabled:border-zinc-500 disabled:text-zinc-300
                     disabled:dark:text-zinc-800"
-        disabled={chatLog.length > 0}
+        // disabled={chatLog.length > 0}
         value={LLM}
         onChange={(e) => setLLM(e.target.value)}
       >

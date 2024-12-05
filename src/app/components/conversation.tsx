@@ -9,13 +9,13 @@ import clsx from "clsx";
 
 export const Conversation: FC<{
   LLM: string;
-  setLLM: Function;
-  chatLog: Message[];
-  setChatLog: Function;
+  // setLLM: Function;
+  // chatLog: Message[];
+  // setChatLog: Function;
   placeholder: string;
-}> = ({ LLM, setLLM, chatLog, setChatLog, placeholder }) => {
+}> = ({ LLM, placeholder }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
-  const chatEndRef = useRef<null | HTMLDivElement>(null);
+  // const chatEndRef = useRef<null | HTMLDivElement>(null);
 
   // useEffect(() => {
   //     chatEndRef.current?.scrollIntoView({behavior:"smooth"})
@@ -53,6 +53,7 @@ export const Conversation: FC<{
               },
             })
           }
+          autoComplete="off"
         >
           <label
             className="relative bg-white flex items-center justify-center border py-2 px-2 rounded-lg gap-2 my-4 focus-within:border-zinc-300 shadow-md" //Styles the searchbar
@@ -70,12 +71,6 @@ export const Conversation: FC<{
             <button
               type="submit"
               className="w-auto py-1 px-2 bg-zinc-950 border-black text-zinc-100 fill-white active:enabled:scale-95 hover:enabled:scale-105 border overflow-hidden relative rounded-xl disabled:opacity-70 shadow-md"
-              disabled={
-                input.length == 0 ||
-                (chatLog.length > 0 &&
-                  chatLog[chatLog.length - 1].content ==
-                    "Waiting for response...")
-              }
               // onClick={() => {
               //     callModel(LLM, chatLog, setChatLog, message, setReturnMessage)}
               // }

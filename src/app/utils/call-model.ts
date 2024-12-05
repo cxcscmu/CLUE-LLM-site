@@ -8,7 +8,7 @@ import { LLM } from "@/app/interfaces/llm";
 // });
 
 async function chatOpenAI(chatLog: any, setChatLog: Function) {
-  let returnMessage;
+  // let returnMessage;
   // try {
   //     await fetch('/api/openai', {
   //         method: 'POST',
