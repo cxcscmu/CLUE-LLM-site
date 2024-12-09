@@ -25,33 +25,3 @@ export async function POST(req: Request) {
 
   return result.toDataStreamResponse();
 }
-
-// import { OpenAI } from 'openai';
-
-// const clientOpenAI = new OpenAI({
-//     apiKey: process.env.OPENAI_API_KEY,
-//     // dangerouslyAllowBrowser: true,
-// });
-
-// export async function POST (req: Request) { //, chatLog: any, setChatLog: Function)  {
-//     const chatLog = JSON.parse(req.body);
-//     let returnMessage;
-
-//     try {
-//         const response = await clientOpenAI.chat.completions.create({
-//             messages: chatLog,
-//             model: 'gpt-4o'
-//         })
-
-//         if (response) {
-//             returnMessage = response.choices[0].message.content
-//         } else {
-//             returnMessage = "An error occured."
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         returnMessage = "An error occured."
-//     }
-
-//     return Response.json(returnMessage)
-// }
