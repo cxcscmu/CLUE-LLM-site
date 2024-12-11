@@ -1,7 +1,9 @@
+// This file implements the half of the conversation module that displays the chat history to the user, inheriting the required variable to do so from <conversation>
+
 "use client";
 import { FC, useEffect, useRef } from "react";
-import { Message } from "@/app/interfaces/message";
 import clsx from "clsx";
+import { Message } from "ai";
 
 export const Chatlog: FC<{
   chatLog: Message[];
@@ -14,18 +16,17 @@ export const Chatlog: FC<{
 
   if (chatLog.length) {
     return (
-      <div
-        className="
-            px-4 w-full outline-none border rounded-lg max-w-5xl max-h-96 shadow-inner overflow-auto
-            bg-zinc-200 border-zinc-300
-            dark:bg-zinc-600 dark:border-zinc-700"
+      <div className="
+        px-4 w-full outline-none border rounded-lg max-w-5xl max-h-96 shadow-inner overflow-auto
+        bg-zinc-200 border-zinc-300
+        dark:bg-zinc-600 dark:border-zinc-700"
       >
         {chatLog.map((item, index) => (
-          <div
+          item.content && <div
             className={clsx(
               "my-2 px-5 py-2 w-10/12 outline-none border border-zinc-100 rounded-lg shadow-md bg-white",
               {
-                "ml-auto": index % 2 === 1,
+                "ml-auto": item.role === "user",
               },
             )}
             key={index}

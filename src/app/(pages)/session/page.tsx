@@ -1,19 +1,23 @@
 "use client";
-import { Footer } from "@/app/components/footer";
-import { Logo } from "@/app/components/logo";
-import { Conversation } from "@/app/components/conversation";
+import { Footer } from "@/components/(ui)/footer";
+import { Logo } from "@/components/(ui)/logo";
+import { Conversation } from "@/components/(logic)/conversation";
 import React, { useState } from "react";
-import { Selector } from "@/app/components/selector";
-// import { useChat } from "ai/react";
-import { implementedModels } from "@/app/utils/call-model";
-import { Protected } from "@/app/components/protected";
+import { implementedModels } from "@/utils/models-list";
+import { Protected } from "@/components/(logic)/protected";
+import { Selector } from "@/_legacy/components/(logic)/selector";
 
 export default function Home() {
-  const [chatLog, setChatLog] = useState([]);
   const [LLM, setLLM] = useState(implementedModels[0].value);
 
+  const redirect = {
+    reportText: "Your chat session has expired.",
+    nextPage: "/interview",
+    nextPageText: "Please continue to the interview page.",
+  };
+
   return (
-    <Protected>
+    <Protected redirect={redirect} cookieName="interviewUnlocked">
       <div
         className="
           absolute inset-0 min-h-[500px] flex items-center justify-center
@@ -25,14 +29,12 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
-          {/* <Selector LLM={LLM} setLLM={setLLM} /> */}
+          <Selector LLM={LLM} setLLM={setLLM} />
           {/* Lets you pick the LLM to use, only if the chatLog is empty. See components/selector */}
           <Conversation
             LLM={LLM}
-            // setLLM={setLLM}
-            // chatLog={chatLog}
-            // setChatLog={setChatLog}
             placeholder="Chat with me!"
+            logLabel="session"
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}
           {/* <div className="flex flex-row items-center justify-end">

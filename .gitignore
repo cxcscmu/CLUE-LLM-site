@@ -3,4 +3,4 @@
 /.env.local.example
 /.next
 /node_modules
-/src/app/_legacy
+/src/_legacy

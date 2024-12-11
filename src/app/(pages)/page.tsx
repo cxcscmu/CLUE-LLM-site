@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Logo } from "@/app/components/logo";
+import { Logo } from "@/components/(ui)/logo";
 import { useState } from "react";
 import { Forward } from "lucide-react";
 import { useRouter } from "next/navigation";
