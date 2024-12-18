@@ -1,12 +1,17 @@
+// This is the initial landing page, and implements the login bar that allows you to get access to the other pages.
+
 "use client";
 import React from "react";
-import { Logo } from "@/components/(ui)/logo";
 import { useState } from "react";
 import { Forward } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import { Logo } from "@ui";
+import { setHistory } from "@/utils";
+
 export default function Home() {
   const [password, setPassword] = useState("");
+  const [workerID, setWorkerID] = useState("");
   const [status, setStatus] = useState(
     "Please enter the password you were provided.",
   );
@@ -21,13 +26,26 @@ export default function Home() {
       },
       body: JSON.stringify({ attempt: password }),
     });
-    let { isCorrect } = await response.json();
+    const { isCorrect } = await response.json();
 
-    // let response = (password === "cmu_lti_clue")
     if (isCorrect) {
-      router.push("/session");
+      setHistory(
+        JSON.parse(
+          JSON.stringify({
+            workerID: workerID ? workerID : password,
+            sessionModel: "",
+            session: [],
+            interviewModel: "",
+            interview: [],
+          }),
+        ),
+      );
+
+      router.push(`/session`);
     } else {
-      setStatus(`The password ${password} is incorrect. Please try again.`);
+      setStatus(
+        `The password you entered, ${password}, is incorrect. Please try again.`,
+      );
       setPassword("");
     }
   };

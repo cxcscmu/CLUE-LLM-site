@@ -10,7 +10,8 @@ export async function POST(req: Request) {
   const cookieStore = cookies();
 
   const correctPassword = process.env.ACCESS_PASSWORD;
-  const result = (attempt === correctPassword);
+  const result =
+    attempt === correctPassword || process.env.NODE_ENV === "development";
 
   if (result) {
     // Set two cookies - one lasting 10 minutes that lets you chat with the conversational bot, one lasting 20 minutes that lets you have an interview after you do.
@@ -28,12 +29,12 @@ export async function POST(req: Request) {
       maxAge: 1200,
       httpOnly: true,
       path: "/",
-      sameSite: "strict"
+      sameSite: "strict",
     });
   } else {
     // An unsuccessful password deletes those cookies, just in case.
     cookieStore.delete("chatUnlocked");
-    cookieStore.delete("interviewUnlocked?")
+    cookieStore.delete("interviewUnlocked?");
   }
 
   // Returns true if the log-in was successful.
@@ -46,11 +47,8 @@ export async function GET() {
   const chatUnlocked = cookieStore.has("chatUnlocked");
   const interviewUnlocked = cookieStore.has("interviewUnlocked");
 
-  return NextResponse.json({ chatUnlocked: chatUnlocked, interviewUnlocked: interviewUnlocked });
+  return NextResponse.json({
+    chatUnlocked: chatUnlocked,
+    interviewUnlocked: interviewUnlocked,
+  });
 }
-
-export interface protectedPages {
-  chatUnlocked: boolean;
-  interviewUnlocked: boolean;
-}
-export type protectedPage = "chatUnlocked" | "interviewUnlocked"

@@ -1,23 +1,28 @@
+// This page implements - under a <protected> component - the chat that the user will initially have with the chatbot.
+
 "use client";
-import { Footer } from "@/components/(ui)/footer";
-import { Logo } from "@/components/(ui)/logo";
-import { Conversation } from "@/components/(logic)/conversation";
 import React, { useState } from "react";
-import { implementedModels } from "@/utils/models-list";
-import { Protected } from "@/components/(logic)/protected";
-import { Selector } from "@/_legacy/components/(logic)/selector";
+
+import { redirector } from "@/interfaces";
+import { Conversation, Protected, Selector } from "@logic";
+import { Footer, Logo } from "@ui";
+import { implementedModels } from "@utils";
 
 export default function Home() {
   const [LLM, setLLM] = useState(implementedModels[0].value);
 
-  const redirect = {
-    reportText: "Your chat session has expired.",
+  // URItoHist
+
+  const redirect: redirector = {
+    reportText:
+      "Your chat session has expired. You will automatically be directed to the interview page.",
     nextPage: "/interview",
-    nextPageText: "Please continue to the interview page.",
+    nextPageText: "",
+    autopush: true,
   };
 
   return (
-    <Protected redirect={redirect} cookieName="interviewUnlocked">
+    <Protected redirect={redirect} cookieName="chatUnlocked">
       <div
         className="
           absolute inset-0 min-h-[500px] flex items-center justify-center
@@ -29,28 +34,19 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
-          <Selector LLM={LLM} setLLM={setLLM} />
-          {/* Lets you pick the LLM to use, only if the chatLog is empty. See components/selector */}
+          <Selector
+            label="Select Model:"
+            values={implementedModels}
+            target={LLM}
+            setFunc={setLLM}
+          />
+          {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. See components/selector */}
           <Conversation
             LLM={LLM}
             placeholder="Chat with me!"
             logLabel="session"
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}
-          {/* <div className="flex flex-row items-center justify-end">
-            <div className="dark:text-zinc-500 mr-3" hidden = {messages.length < 5}>Test</div>
-            <button className="
-              w-auto py-1 px-2 border overflow-hidden relative rounded-xl
-              bg-black border-black text-white
-              dark:bg-white border-white dark:text-black
-              hover:enabled:scale-105 active:enabled:scale-95
-              disabled:bg-zinc-500 disabled:text-zinc-300  disabled:border-zinc-500
-              disabled:dark:text-zinc-800"
-              disabled = {messages.length < 5}
-            >
-                Submit
-            </button>
-                  </div> */}
           <Footer />
           {/* Adds a disclaimer to the bottom of the screen. See components/footer */}
         </div>
