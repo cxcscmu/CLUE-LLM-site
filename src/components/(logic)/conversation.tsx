@@ -68,7 +68,7 @@ export const Conversation: FC<{
 
       setHistory(newHist);
 
-      await fetch("/api/history", {
+      await fetch("/api/store", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

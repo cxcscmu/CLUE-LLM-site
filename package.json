@@ -27,7 +27,6 @@
     "pg": "^8.13.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-reconciler": "^0.31.0",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.0",
     "unist-builder": "^4.0.0",
