@@ -15,7 +15,6 @@ export const Protected: FC<{
   cookieName: protectedPage;
 }> = ({ children, redirect, cookieName }) => {
   const [accessible, setAccessible] = useState<Boolean | undefined>(undefined);
-  const [time, setTime] = useState(new Date());
   const router = useRouter();
 
   const [reportText, setReportText] = useState(
@@ -25,6 +24,7 @@ export const Protected: FC<{
   const [nextPageText, setNextPageText] = useState(
     "Please return to the sign-in page.",
   );
+
   const [redirectCall, setRedirectCall] = useState(false);
 
   useEffect(() => {
@@ -52,14 +52,15 @@ export const Protected: FC<{
       } else if (redirectCall && redirect && redirect.autopush) {
         router.push(redirect.nextPage);
       }
-
-      setInterval(() => {
-        setTime(new Date());
-      }, 10000);
     };
 
-    fetchLockedStatus();
-  }, [time]);
+    // fetchLockedStatus();
+    const intervalID = setInterval(() => {
+      fetchLockedStatus();
+    }, 1000);
+
+    return () => clearInterval(intervalID);
+  });
 
   // TODO: Implement a loading spinner for while the thing is initially fething the cookies.
   if (accessible === undefined) {

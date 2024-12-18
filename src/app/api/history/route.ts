@@ -16,11 +16,11 @@ let chatHistory: conversation = JSON.parse(
   }),
 );
 
-export async function getHistory() {
+async function getHistory() {
   return chatHistory;
 }
 
-export async function setHistory(newHist: conversation) {
+async function setHistory(newHist: conversation) {
   chatHistory = newHist;
   // console.log(chatHistory)
   return;
