@@ -1,6 +1,4 @@
-/.env
-/.env.local
-/.env.local.example
+/.env*
 /.next
 /node_modules
 /src/app/_legacy
