@@ -1,7 +1,7 @@
 // This file pairs the chatlog and chat-message components together, and provides the information they require to function. useChat() is defined here to allow them to share information properly.
 
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Message, useChat } from "ai/react";
 
 import { Chatlog, ChatMessage } from "@logic";
@@ -22,42 +22,23 @@ export const Conversation: FC<{
   initialMessages,
 }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    ...(initialMessages && { initialMessages: initialMessages }),
-    onFinish: async (message) => {
+    ...(initialMessages && { initialMessages: initialMessages })
+  });
+
+  useEffect(() => {
+    const updateHist = async () => {
       const hist = getHistory();
-
-      let conv: Message[] = [];
-      let id: number = 0;
-      if (initialMessages && !hist[logLabel].length) {
-        conv = [...initialMessages];
-        id = initialMessages.length;
-      }
-
-      conv = [
-        ...conv,
-        ...hist[logLabel],
-        {
-          id: (hist[logLabel].length + id).toString(),
-          role: "user",
-          content: input,
-        },
-        {
-          id: (hist[logLabel].length + id + 1).toString(),
-          role: "assistant",
-          content: message.content,
-        },
-      ];
 
       const newHist: conversation = {
         ...hist,
         ...(logLabel === "session" && {
-          session: conv,
+          session: messages,
           sessionModel: LLM,
           sessionStart: hist.sessionStart ? hist.sessionStart : new Date(),
           sessionEnd: new Date(),
         }),
         ...(logLabel === "interview" && {
-          interview: conv,
+          interview: messages,
           interviewModel: LLM,
           interviewStart: hist.interviewStart
             ? hist.interviewStart
@@ -75,8 +56,10 @@ export const Conversation: FC<{
         },
         body: JSON.stringify({ newHist: newHist }),
       });
-    },
-  });
+    }
+
+  updateHist();
+  }, [messages])
 
   let modelVars = {
     model: LLM,
