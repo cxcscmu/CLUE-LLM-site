@@ -2,7 +2,7 @@
 
 "use client";
 import React, { FC } from "react";
-import { Forward } from "lucide-react";
+import { Label, SubmitButton, TextInput } from "@ui";
 
 export const ChatMessage: FC<{
   handleSubmit: Function;
@@ -24,25 +24,15 @@ export const ChatMessage: FC<{
         }
         autoComplete="off"
       >
-        <label
-          className="relative bg-white flex items-center justify-center border py-2 px-2 rounded-lg gap-2 my-4 focus-within:border-zinc-300 shadow-md"
-          htmlFor="search-bar"
-        >
-          <input
+        <Label label="chat-bar">
+          <TextInput
             id="chat-bar"
             value={input}
             onChange={handleInputChange}
-            autoFocus
             placeholder={placeholder}
-            className="px-2 pr-6 w-full rounded-md flex-1 outline-none bg-white"
           />
-          <button
-            type="submit"
-            className="w-auto py-1 px-2 bg-zinc-950 border-black text-zinc-100 fill-white active:enabled:scale-95 hover:enabled:scale-105 border overflow-hidden relative rounded-xl disabled:opacity-70 shadow-md"
-          >
-            <Forward size={16} />
-          </button>
-        </label>
+          <SubmitButton/>
+        </Label>
       </form>
     </div>
   );

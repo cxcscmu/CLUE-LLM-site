@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
   const correctPassword = process.env.ACCESS_PASSWORD;
   const result =
-    attempt === correctPassword || process.env.NODE_ENV === "development";
+    attempt === correctPassword;// || process.env.NODE_ENV === "development";
 
   if (result) {
     // Set two cookies - one lasting 10 minutes that lets you chat with the conversational bot, one lasting 20 minutes that lets you have an interview after you do.
