@@ -1,7 +1,9 @@
 import { Loader2 } from "lucide-react";
 import { FC } from "react";
 
-export const Loader: FC = () => {
+export const Loader: FC<{
+  displayText?: string;
+}> = ({ displayText = "Loading..." }) => {
   return (
     <div
       className="
@@ -11,7 +13,7 @@ export const Loader: FC = () => {
     >
       <div className="relative flex flex-col gap-2 px-4 text-zinc-800 dark:text-zinc-300">
         <Loader2 className="self-center animate-spin" />
-        Checking password...
+        <i> {displayText} </i>
       </div>
     </div>
   );

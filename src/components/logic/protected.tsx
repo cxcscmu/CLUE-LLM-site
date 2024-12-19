@@ -40,17 +40,13 @@ export const Protected: FC<{
         setNextPage(redirect.nextPage);
         setNextPageText(redirect.nextPageText);
         setRedirectCall(true);
-      } else if (redirectCall && redirect && redirect.func) {
+      } else if (redirectCall && redirect) {
         if (redirect.autopush) {
-          const URI = redirect.func();
-          const URL = `${redirect.nextPage}?${URI}`;
-          router.push(URL);
-        } else {
+          router.push(redirect.nextPage);
+        } else if (redirect.func) {
           setRedirectCall(false);
           await redirect.func();
         }
-      } else if (redirectCall && redirect && redirect.autopush) {
-        router.push(redirect.nextPage);
       }
     };
 
@@ -64,9 +60,9 @@ export const Protected: FC<{
 
   // TODO: Implement a loading spinner for while the thing is initially fething the cookies.
   if (accessible === undefined) {
-    return <Loader />;
+    return <Loader displayText="Checking password..." />;
   } else if (accessible) {
-    return <div> {children}</div>;
+    return <div> {children} </div>;
   } else
     return (
       <div

@@ -3,7 +3,7 @@
 "use client";
 import React, { useState } from "react";
 
-import { redirector } from "@/interfaces";
+import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
 import { Footer, Logo } from "@ui";
 import { implementedModels } from "@utils";

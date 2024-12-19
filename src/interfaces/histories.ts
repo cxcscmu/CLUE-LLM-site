@@ -1,14 +1,5 @@
 import { Message } from "ai";
 
-export interface historyBlock {
-  workerID?: string;
-  logLabel: "session" | "interview";
-  initial?: Message[];
-  sent: string;
-  recieved: string;
-  LLM: string;
-}
-
 export interface conversation extends JSON {
   workerID: string;
   sessionModel: string;

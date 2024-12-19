@@ -4,7 +4,7 @@
 
 import { NextResponse } from "next/server";
 
-import { conversation } from "@/interfaces";
+import { conversation } from "@interfaces";
 
 let chatHistory: conversation = JSON.parse(
   JSON.stringify({

@@ -1,5 +1,5 @@
 export interface selection {
-  // This lets me use LLM as a class throughout the project, mostly so that a selector can display a different value for the name of the model vs its actual text.
+  // For the drop-down selector, this pairs up a value to be selected and the text to display for its selection.
 
   value: string;
   label: string;

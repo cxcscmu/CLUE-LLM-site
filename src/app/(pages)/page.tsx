@@ -7,7 +7,7 @@ import { Forward } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Logo } from "@ui";
-import { setHistory } from "@/utils";
+import { setHistory } from "@utils";
 
 export default function Home() {
   const [password, setPassword] = useState("");

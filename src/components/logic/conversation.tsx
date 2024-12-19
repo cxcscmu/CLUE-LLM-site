@@ -5,8 +5,8 @@ import { FC, useEffect } from "react";
 import { Message, useChat } from "ai/react";
 
 import { Chatlog, ChatMessage } from "@logic";
-import { getHistory, setHistory } from "@/utils";
-import { conversation } from "@/interfaces";
+import { getHistory, setHistory } from "@utils";
+import { conversation } from "@interfaces";
 
 export const Conversation: FC<{
   LLM: string;
@@ -22,7 +22,7 @@ export const Conversation: FC<{
   initialMessages,
 }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    ...(initialMessages && { initialMessages: initialMessages })
+    ...(initialMessages && { initialMessages: initialMessages }),
   });
 
   useEffect(() => {
@@ -56,10 +56,10 @@ export const Conversation: FC<{
         },
         body: JSON.stringify({ newHist: newHist }),
       });
-    }
+    };
 
-  updateHist();
-  }, [messages])
+    updateHist();
+  }, [messages, LLM, logLabel]);
 
   let modelVars = {
     model: LLM,

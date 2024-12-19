@@ -3,8 +3,7 @@
 "use client";
 import { FC, useState } from "react";
 
-// import { implementedModels } from "@utils";
-import { selection } from "@/interfaces";
+import { selection } from "@interfaces";
 
 export const Selector: FC<{
   label?: string;
