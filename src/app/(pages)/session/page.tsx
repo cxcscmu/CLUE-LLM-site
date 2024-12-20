@@ -8,15 +8,15 @@ import { Conversation, Protected, Selector } from "@logic";
 import { Footer, Logo } from "@ui";
 import { implementedModels } from "@utils";
 
-async function toNextPage() {
-  const response = await fetch("api/password", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ deleteCookie: "chatUnlocked" }),
-  });
-}
+// async function toNextPage() {
+//   const response = await fetch("api/password", {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ deleteCookie: "chatUnlocked" }),
+//   });
+// }
 
 export default function Home() {
   const [LLM, setLLM] = useState(implementedModels[0].value);
@@ -55,8 +55,8 @@ export default function Home() {
             LLM={LLM}
             placeholder="Chat with me!"
             logLabel="session"
-            skipMessage="When you are finished with your conversation, click here."
-            skipFunction={toNextPage}
+            // skipMessage="When you are finished with your conversation, click here."
+            // skipFunction={toNextPage}
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}
           <Footer />
