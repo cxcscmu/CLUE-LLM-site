@@ -74,7 +74,7 @@ export default function Home() {
               id="login-bar"
               value={workerID}
               onChange={(e: any) => setWorkerID(e.target.value)}
-              placeholder="Enter your Worker ID..."
+              placeholder="Enter your Worker ID here..."
             />
           </Label>
           <Label label="chat-bar">
@@ -82,9 +82,11 @@ export default function Home() {
               id="chat-bar"
               value={password}
               onChange={(e: any) => setPassword(e.target.value)}
-              placeholder="Enter the provided password..."
+              placeholder="Enter the provided password here..."
+              disabled={!Boolean(workerID)}
+              disabledPlaceholder=""
             />
-            <SubmitButton/>
+            <SubmitButton disabled={!Boolean(workerID)}/>
           </Label>
         </form>
       </div>

@@ -9,14 +9,19 @@ export const TextInput: FC<{
     value: string;
     onChange: React.ChangeEventHandler;
     placeholder?: string;
-}> = ({ id, value, onChange, placeholder }) => {
-    
+    disabled?: boolean;
+    disabledPlaceholder?: string
+}> = ({ id, value, onChange, placeholder= "Type here...", disabled=false, disabledPlaceholder="" }) => {
     return <input 
       id={id}
       value={value}
       onChange={onChange}
-      placeholder={placeholder}
+      placeholder={disabled ? disabledPlaceholder : placeholder}
       autoFocus
-      className="px-2 pr-6 w-full rounded-md flex-1 outline-none bg-white"
+      disabled={disabled}
+      className="
+        px-2 pr-6 w-full rounded-md flex-1 outline-none bg-white
+        disabled:opacity-50 disabled:select-none
+      "
     />
 }
