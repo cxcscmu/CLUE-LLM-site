@@ -5,14 +5,22 @@
 import { FC } from "react";
 
 export const TextInput: FC<{
-    id: string;
-    value: string;
-    onChange: React.ChangeEventHandler;
-    placeholder?: string;
-    disabled?: boolean;
-    disabledPlaceholder?: string
-}> = ({ id, value, onChange, placeholder= "Type here...", disabled=false, disabledPlaceholder="" }) => {
-    return <input 
+  id: string;
+  value: string;
+  onChange: React.ChangeEventHandler;
+  placeholder?: string;
+  disabled?: boolean;
+  disabledPlaceholder?: string;
+}> = ({
+  id,
+  value,
+  onChange,
+  placeholder = "Type here...",
+  disabled = false,
+  disabledPlaceholder = "",
+}) => {
+  return (
+    <input
       id={id}
       value={value}
       onChange={onChange}
@@ -24,4 +32,5 @@ export const TextInput: FC<{
         disabled:opacity-50 disabled:select-none
       "
     />
-}
+  );
+};

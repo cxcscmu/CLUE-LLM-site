@@ -1,5 +1,5 @@
-import { Loader2 } from "lucide-react";
 import { FC } from "react";
+import { Loader2 } from "lucide-react";
 
 export const Loader: FC<{
   displayText?: string;

@@ -2,8 +2,10 @@
 
 "use client";
 import { FC, useState } from "react";
+import { Dices } from "lucide-react";
 
 import { selection } from "@interfaces";
+import { FunctionButton } from "@ui";
 
 export const Selector: FC<{
   label?: string;
@@ -21,9 +23,7 @@ export const Selector: FC<{
     return (
       <div className="flex flex-row items-center justify-end">
         {/* Keeps the label and selector in a single line. */}
-        <p className="select-none text-right dark:text-zinc-100">
-          {label}
-        </p>
+        <p className="select-none text-right dark:text-zinc-100">{label}</p>
         <select
           className="
             text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mx-5
@@ -42,18 +42,9 @@ export const Selector: FC<{
             </option>
           ))}
         </select>
-        <button
-          className="
-            w-auto py-1 px-2 border relative rounded-lg
-            bg-black border-black text-white
-            dark:bg-white border-white dark:text-black
-            hover:enabled:scale-105 active:enabled:scale-95
-            disabled:bg-zinc-500 disabled:text-zinc-300 disabled:border-zinc-500
-            disabled:dark:text-zinc-800"
-          onClick={handleRandomize}
-        >
-          Random
-        </button>
+        <FunctionButton onClick={handleRandomize} labeled={false}>
+          <Dices size={20} className="mr-1" />
+        </FunctionButton>
       </div>
     );
   } else if (!randomized) {

@@ -1,5 +1,6 @@
 // This file implements the API calls for checking a password and the cookies it sets:
 // The POST request to check that the password matches the environment variable and to set cookies to confirm;
+// The PUT request to skip you through cookie-protected pages;
 // The GET request to check that the 'logged in' cookies exist.
 
 import { cookies } from "next/headers";
@@ -10,8 +11,7 @@ export async function POST(req: Request) {
   const cookieStore = cookies();
 
   const correctPassword = process.env.ACCESS_PASSWORD;
-  const result =
-    attempt === correctPassword;// || process.env.NODE_ENV === "development";
+  const result = attempt === correctPassword; // || process.env.NODE_ENV === "development";
 
   if (result) {
     // Set two cookies - one lasting 10 minutes that lets you chat with the conversational bot, one lasting 20 minutes that lets you have an interview after you do.
@@ -39,6 +39,25 @@ export async function POST(req: Request) {
 
   // Returns true if the log-in was successful.
   return NextResponse.json({ isCorrect: result });
+}
+
+export async function PUT(req: Request) {
+  const { deleteCookie } = await req.json();
+  const cookieStore = cookies();
+
+  cookieStore.delete(deleteCookie);
+  if (!(deleteCookie === "interviewUnlocked")) {
+    cookieStore.set({
+      name: "interviewUnlocked",
+      value: "true",
+      maxAge: 600,
+      httpOnly: true,
+      path: "/",
+      sameSite: "strict",
+    });
+  }
+
+  return NextResponse.json({ success: true });
 }
 
 export async function GET() {

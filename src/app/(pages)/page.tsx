@@ -65,10 +65,7 @@ export default function Home() {
         >
           <i>{status}</i>
         </div>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          autoComplete="off"
-        >
+        <form onSubmit={(e) => handleSubmit(e)} autoComplete="off">
           <Label label="login-bar">
             <TextInput
               id="login-bar"
@@ -86,7 +83,7 @@ export default function Home() {
               disabled={!Boolean(workerID)}
               disabledPlaceholder=""
             />
-            <SubmitButton disabled={!Boolean(workerID)}/>
+            <SubmitButton disabled={!Boolean(workerID)} />
           </Label>
         </form>
       </div>

@@ -13,6 +13,16 @@ import {
   systemPrompt,
 } from "@utils";
 
+async function endInterview() {
+  const response = await fetch("api/password", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ deleteCookie: "interviewUnlocked" }),
+  });
+}
+
 async function neonCaller() {
   // neon's POST submits a set of chatlogs to a neon database.
   const hist = getHistory();
@@ -67,6 +77,8 @@ export default function Home() {
             system={systemPrompt}
             logLabel="interview"
             initialMessages={startMessage}
+            skipMessage="When the interview is over, click here."
+            skipFunction={endInterview}
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}
           <Footer />

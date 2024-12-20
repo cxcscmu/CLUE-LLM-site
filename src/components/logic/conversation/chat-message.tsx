@@ -2,6 +2,7 @@
 
 "use client";
 import React, { FC } from "react";
+
 import { Label, SubmitButton, TextInput } from "@ui";
 
 export const ChatMessage: FC<{
@@ -31,7 +32,7 @@ export const ChatMessage: FC<{
             onChange={handleInputChange}
             placeholder={placeholder}
           />
-          <SubmitButton/>
+          <SubmitButton />
         </Label>
       </form>
     </div>

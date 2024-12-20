@@ -1,12 +1,15 @@
 // This file pairs the chatlog and chat-message components together, and provides the information they require to function. useChat() is defined here to allow them to share information properly.
 
 "use client";
-import { FC, useEffect } from "react";
+import { FC, MouseEventHandler, useEffect } from "react";
 import { Message, useChat } from "ai/react";
+import { ArrowBigRightDash } from "lucide-react";
+import clsx from "clsx";
 
 import { Chatlog, ChatMessage } from "@logic";
 import { getHistory, setHistory } from "@utils";
 import { conversation } from "@interfaces";
+import { FunctionButton } from "../ui";
 
 export const Conversation: FC<{
   LLM: string;
@@ -14,15 +17,19 @@ export const Conversation: FC<{
   system?: string;
   logLabel: "session" | "interview";
   initialMessages?: Message[];
+  skipMessage?: string;
+  skipFunction?: MouseEventHandler;
 }> = ({
   LLM,
   placeholder = "Type here...",
   system,
   logLabel,
-  initialMessages,
+  initialMessages = [],
+  skipMessage,
+  skipFunction,
 }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    ...(initialMessages && { initialMessages: initialMessages }),
+    initialMessages: initialMessages,
   });
 
   useEffect(() => {
@@ -61,10 +68,38 @@ export const Conversation: FC<{
     updateHist();
   }, [messages, LLM, logLabel]);
 
-  let modelVars = {
+  const modelVars = {
     model: LLM,
     ...(system && { system: system }),
   };
+
+  let skip;
+  if (skipMessage && skipFunction) {
+    skip = (
+      <label className="flex">
+        <p
+          className={clsx(
+            "my-auto ml-auto mr-1 text-xs text-right select-none opacity-50",
+            "text-zinc-500",
+            "dark:text-zinc-300",
+            {
+              "hover:text-zinc-700 hover:dark:text-zinc-200 opacity-100":
+                Boolean(messages.length > initialMessages.length + 1),
+            },
+          )}
+        >
+          {skipMessage}
+        </p>
+        <FunctionButton
+          onClick={skipFunction}
+          disabled={!Boolean(messages.length > initialMessages.length + 1)}
+          labeled={false}
+        >
+          <ArrowBigRightDash size={20} />
+        </FunctionButton>
+      </label>
+    );
+  }
 
   return (
     <div>
@@ -77,6 +112,8 @@ export const Conversation: FC<{
         handleInputChange={handleInputChange}
         placeholder={placeholder}
       />
+
+      {skip}
     </div>
   );
 };
