@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Instructions, Logo } from "@ui";
+import { Footer, Instructions, Instructions, Logo } from "@ui";
 import {
   getHistory,
   interviewModels,
