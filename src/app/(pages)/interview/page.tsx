@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Logo } from "@ui";
+import { Footer, Instructions, Logo } from "@ui";
 import {
   getHistory,
   interviewModels,
@@ -19,7 +19,7 @@ async function endInterview() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ deleteCookie: "interviewUnlocked" }),
+    body: JSON.stringify({ cookieName: "interviewUnlocked", cookieOperation: "delete" }),
   });
 }
 
@@ -64,6 +64,9 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
+          <Instructions>
+            Be interviewed about the previous conversation.
+          </Instructions>
           <Selector
             label="Select Model:"
             values={interviewModels}
@@ -77,7 +80,8 @@ export default function Home() {
             system={systemPrompt}
             logLabel="interview"
             initialMessages={startMessage}
-            skipMessage="When the interview is over, click here."
+            skipAccessTime={600}
+            skipMessage="You may now end the interview, if it's complete."
             skipFunction={endInterview}
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}

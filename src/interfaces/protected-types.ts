@@ -6,9 +6,18 @@ export interface redirector {
   autopush?: Boolean;
 }
 
-export interface protectedPages {
+export interface passwordProtectionStatus {
   chatUnlocked: boolean;
   interviewUnlocked: boolean;
 }
 
-export type protectedPage = "chatUnlocked" | "interviewUnlocked";
+export type passwordProtectionCookie = "chatUnlocked" | "interviewUnlocked";
+
+type cookieOperation = "set" | "delete";
+
+export interface cookieCommand {
+  cookieName: string;
+  cookieOperation: cookieOperation;
+  cookieTime?: number;
+  cookieValue?: string;
+}

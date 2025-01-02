@@ -2,8 +2,9 @@
 // The tool a bot needs in order to view a prior conversation;
 // The POST request that determines which model is being used and makes the call to an external API.
 
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI, openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { streamText, tool } from "ai";
 import { z } from "zod";
 
@@ -64,27 +65,55 @@ export async function POST(req: Request) {
 
   // Implements switching between models
   switch (model) {
-    case "gpt-4o":
-    case "gpt-4o-mini":
-      result = streamText({
-        model: openai(model),
-        messages,
-        tools: interviewTool,
-        system: system,
-        maxSteps: maxSteps,
-      });
-      break;
+    // Models that go through the Anthropic SDK.
     case "claude-3-5-haiku-20241022":
     case "claude-3-opus-20240229":
     case "claude-3-5-sonnet-20241022":
       result = streamText({
         model: anthropic(model),
-        messages,
+        messages: messages,
         tools: interviewTool,
         system: system,
         maxSteps: maxSteps,
       });
-      console.log(result);
+      break;
+    // Models that go through the Google SDK.
+    case "gemini-2.0-flash-exp":
+    case "gemini-1.5-flash":
+    case "gemini-1.5-pro":
+      result = streamText({
+        model: google(model),
+        messages: messages,
+        tools: interviewTool,
+        system: system,
+        maxSteps: maxSteps,
+      });
+      break;
+    // Models that go through the OpenAI SDK.
+    case "gpt-4o":
+    case "gpt-4o-mini":
+      result = streamText({
+        model: openai(model),
+        messages: messages,
+        tools: interviewTool,
+        system: system,
+        maxSteps: maxSteps,
+      });
+      break;
+    // Models with various custom SDKs
+    case "deepseek-chat":
+      const deepseek_api = process.env.DEEPSEEK_API_KEY;
+      const deepseek = createOpenAI({
+        baseURL: "https://api.deepseek.com",
+        apiKey: deepseek_api,
+      });
+      result = streamText({
+        model: deepseek(model),
+        messages: messages,
+        tools: interviewTool,
+        system: system,
+        maxSteps: maxSteps,
+      });
       break;
   }
 

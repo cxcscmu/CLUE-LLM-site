@@ -3,38 +3,39 @@
 // The PUT request to skip you through cookie-protected pages;
 // The GET request to check that the 'logged in' cookies exist.
 
+import { passwordProtectionStatus } from "@interfaces";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  const { attempt } = await req.json();
+async function setCookie(
+  cookieName: string,
+  cookieTime: number,
+  cookieValue: string,
+) {
   const cookieStore = cookies();
+  cookieStore.set({
+    name: cookieName,
+    value: cookieValue,
+    maxAge: cookieTime,
+    httpOnly: true,
+    path: "/",
+    sameSite: "strict",
+  });
+}
+
+export async function POST(req: Request) {
+  const { attempt, cookieName, cookieTime } = await req.json();
 
   const correctPassword = process.env.ACCESS_PASSWORD;
   const result = attempt === correctPassword; // || process.env.NODE_ENV === "development";
 
   if (result) {
-    // Set two cookies - one lasting 10 minutes that lets you chat with the conversational bot, one lasting 20 minutes that lets you have an interview after you do.
-    cookieStore.set({
-      name: "chatUnlocked",
-      value: "true",
-      maxAge: 600,
-      httpOnly: true,
-      path: "/",
-      sameSite: "strict",
-    });
-    cookieStore.set({
-      name: "interviewUnlocked",
-      value: "true",
-      maxAge: 1200,
-      httpOnly: true,
-      path: "/",
-      sameSite: "strict",
-    });
+    // Set the specified cookie for the given time.
+    await setCookie(cookieName, cookieTime, "true");
   } else {
-    // An unsuccessful password deletes those cookies, just in case.
-    cookieStore.delete("chatUnlocked");
-    cookieStore.delete("interviewUnlocked?");
+    // An unsuccessful password deletes that cookie, just in case.
+    const cookieStore = cookies();
+    cookieStore.delete(cookieName);
   }
 
   // Returns true if the log-in was successful.
@@ -42,19 +43,17 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  const { deleteCookie } = await req.json();
-  const cookieStore = cookies();
+  const { cookieName, cookieOperation, cookieTime, cookieValue } =
+    await req.json();
 
-  cookieStore.delete(deleteCookie);
-  if (!(deleteCookie === "interviewUnlocked")) {
-    cookieStore.set({
-      name: "interviewUnlocked",
-      value: "true",
-      maxAge: 600,
-      httpOnly: true,
-      path: "/",
-      sameSite: "strict",
-    });
+  switch (cookieOperation) {
+    case "set":
+      await setCookie(cookieName, cookieTime, cookieValue);
+      break;
+    case "delete":
+      const cookieStore = cookies();
+      cookieStore.delete(cookieName);
+      break;
   }
 
   return NextResponse.json({ success: true });
@@ -69,5 +68,5 @@ export async function GET() {
   return NextResponse.json({
     chatUnlocked: chatUnlocked,
     interviewUnlocked: interviewUnlocked,
-  });
+  } as passwordProtectionStatus);
 }
