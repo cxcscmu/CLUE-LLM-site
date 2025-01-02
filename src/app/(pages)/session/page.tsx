@@ -5,23 +5,36 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Logo } from "@ui";
-import { implementedModels } from "@utils";
+import { Footer, Instructions, Logo } from "@ui";
+import { sessionModels } from "@utils";
 
-// async function toNextPage() {
-//   const response = await fetch("api/password", {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ deleteCookie: "chatUnlocked" }),
-//   });
-// }
+async function toNextPage() {
+  await fetch("api/password", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      cookieName: "chatUnlocked",
+      cookieOperation: "delete",
+    }),
+  });
+  await fetch("api/password", {
+    method: "Put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      cookieName: "interviewUnlocked",
+      cookieOperation: "set",
+      cookieTime: 900,
+      cookieValue: "true",
+    }),
+  });
+}
 
 export default function Home() {
-  const [LLM, setLLM] = useState(implementedModels[0].value);
-
-  // URItoHist
+  const [LLM, setLLM] = useState(sessionModels[0].value);
 
   const redirect: redirector = {
     reportText:
@@ -29,6 +42,7 @@ export default function Home() {
     nextPage: "/interview",
     nextPageText: "",
     autopush: true,
+    func: toNextPage,
   };
 
   return (
@@ -44,9 +58,10 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
+          <Instructions>Chat with a model for 10-15 minutes</Instructions>
           <Selector
             label="Select Model:"
-            values={implementedModels}
+            values={sessionModels}
             target={LLM}
             setFunc={setLLM}
           />
@@ -55,8 +70,9 @@ export default function Home() {
             LLM={LLM}
             placeholder="Chat with me!"
             logLabel="session"
-            // skipMessage="When you are finished with your conversation, click here."
-            // skipFunction={toNextPage}
+            skipAccessTime={600}
+            skipMessage="You may now end the conversation early, if you wish."
+            skipFunction={toNextPage}
           />
           {/* Contains the chatlog and message-sending components. See components/conversation */}
           <Footer />

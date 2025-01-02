@@ -23,7 +23,12 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ attempt: password }),
+      body: JSON.stringify({
+        attempt: password,
+        cookieName: "chatUnlocked",
+        cookieTime: 900,
+        cookieValue: "true",
+      }),
     });
     const { isCorrect } = await response.json();
 
@@ -81,9 +86,9 @@ export default function Home() {
               onChange={(e: any) => setPassword(e.target.value)}
               placeholder="Enter the provided password here..."
               disabled={!Boolean(workerID)}
-              disabledPlaceholder=""
+              disabledPlaceholder="Enter your Worker ID first."
             />
-            <SubmitButton disabled={!Boolean(workerID)} />
+            <SubmitButton disabled={!Boolean(password)} />
           </Label>
         </form>
       </div>

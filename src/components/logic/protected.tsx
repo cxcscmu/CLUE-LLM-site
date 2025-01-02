@@ -5,14 +5,18 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Loader, Logo } from "@ui";
-import { protectedPage, protectedPages, redirector } from "@interfaces";
+import {
+  passwordProtectionCookie,
+  passwordProtectionStatus,
+  redirector,
+} from "@interfaces";
 import { useRouter } from "next/navigation";
-// Adding to the pages that are protected needs to be done in the password router. These imports make it possible for this component to be generic, by guaranteeing that the cookieName is one of the keys of protectedPages.
+// Adding to the pages that are protected needs to be done in the password router. These imports make it possible for this component to be generic, by guaranteeing that the cookieName is one of the keys of passwordProtectionStatus.
 
 export const Protected: FC<{
   children: ReactNode;
   redirect?: redirector;
-  cookieName: protectedPage;
+  cookieName: passwordProtectionCookie;
 }> = ({ children, redirect, cookieName }) => {
   const [accessible, setAccessible] = useState<Boolean | undefined>(undefined);
   const router = useRouter();
@@ -30,7 +34,7 @@ export const Protected: FC<{
   useEffect(() => {
     const fetchLockedStatus = async () => {
       const response = await fetch("api/password");
-      const pages: protectedPages = await response.json();
+      const pages: passwordProtectionStatus = await response.json();
 
       setAccessible(pages[cookieName]);
 
@@ -41,11 +45,12 @@ export const Protected: FC<{
         setNextPageText(redirect.nextPageText);
         setRedirectCall(true);
       } else if (redirectCall && redirect) {
-        if (redirect.autopush) {
-          router.push(redirect.nextPage);
-        } else if (redirect.func) {
+        if (redirect.func) {
           setRedirectCall(false);
           await redirect.func();
+        }
+        if (redirect.autopush) {
+          router.push(redirect.nextPage);
         }
       }
     };

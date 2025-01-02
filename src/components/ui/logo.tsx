@@ -1,7 +1,12 @@
 import React, { FC } from "react";
 import { MessageCircleQuestion } from "lucide-react";
 
-export const Logo: FC = () => {
+export const Logo: FC<{
+  pageLabel?: string;
+}> = ({ pageLabel }) => {
+  const label: string = pageLabel ? `: ${pageLabel}` : "";
+  const title = `CLUE-LLM${label}`;
+
   return (
     <div className="flex gap-4 items-center justify-center cursor-default select-none relative">
       {/* This keeps the three pieces aligned in a row. */}
@@ -13,7 +18,7 @@ export const Logo: FC = () => {
       </div>
       <div className="text-center font-medium text-2xl md:text-3xl text-zinc-900 relative text-nowrap dark:text-zinc-100">
         {/* Sets the logo to be the right size. */}
-        CLUE-LLM
+        {title}
       </div>
       <div
         className="
