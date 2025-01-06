@@ -29,7 +29,7 @@ async function endInterview() {
 async function neonCaller() {
   // neon's POST submits a set of chatlogs to a neon database.
   const hist = getHistory();
-  const response = await fetch("/api/neon", {
+  const response = await fetch("api/neon", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

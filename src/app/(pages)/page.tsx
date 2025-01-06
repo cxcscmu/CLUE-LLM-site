@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { Label, Logo, SubmitButton, TextInput } from "@ui";
 import { setHistory } from "@utils";
+// import { GetPasswordTest } from "@logic/legacy/getPasswordTest";
 
 export default function Home() {
   const [password, setPassword] = useState("");
@@ -91,6 +92,7 @@ export default function Home() {
             <SubmitButton disabled={!Boolean(password)} />
           </Label>
         </form>
+        {/* <GetPasswordTest /> */}
       </div>
     </div>
   );
