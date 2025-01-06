@@ -48,7 +48,7 @@ export default function Home() {
       router.push(`/session`);
     } else {
       setStatus(
-        `The password you entered, ${password}, is incorrect. Please try again.`,
+        `The password you entered is incorrect or has already been used. Please try again.`,
       );
       setPassword("");
     }

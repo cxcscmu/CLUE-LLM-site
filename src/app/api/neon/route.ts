@@ -1,7 +1,7 @@
 // This file implements all necessary functions for connecting to the online neon server and adding information to it.
 // The POST request that submits data to the server.
-
-// Anything else...? Maybe an option to get your own data from the server if you input your unique conversation ID, returned by the above?
+// The GET request that gets an unused password.
+// The checkPassword function will be called from the password API.
 
 import { NextResponse } from "next/server";
 import { Client } from "pg";
@@ -44,6 +44,46 @@ export async function POST(req: Request) {
       },
       { status: 200 },
     );
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Connection to database failed.",
+      },
+      { status: 500 },
+    );
+  }
+}
+
+export async function checkPassword(password: string) {
+  // This needs to accept a password, then connect to the Neon database to see if that password is found there. If not, or if that password is marked as used, return False - otherwise, return mark the password as used and return True.
+
+  try {
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    });
+    await client.connect();
+
+    const query = `SELECT * FROM clue_llm."Passwords"
+    WHERE password = $1;`
+    const result = await client.query(query, [password]);
+    // console.log(result)
+    if ( result.rowCount ) {
+      const row = result.rows[0]
+      // console.log(row)
+
+      if (!row.used) {
+        const update = `UPDATE clue_llm."Passwords" SET used = True WHERE password = $1`
+        const update_result = await client.query(update, [password])
+        return NextResponse.json({success: true});
+      } else {
+        return NextResponse.json({success: false});
+      }
+    } else {
+      return NextResponse.json({success: false});
+    }
   } catch (e) {
     console.log(e);
     return NextResponse.json(
