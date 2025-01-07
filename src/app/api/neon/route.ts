@@ -97,8 +97,10 @@ export async function GET() {
   }
 }
 
-export async function checkPassword(password: string) {
+export async function PUT(req: Request) {
   // This needs to accept a password, then connect to the Neon database to see if that password is found there. If not, or if that password is marked as used, return False - otherwise, mark the password as used and return True.
+
+  const { password } = await req.json();
 
   try {
     const client = new Client({
