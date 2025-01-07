@@ -4,4 +4,4 @@
 /node_modules
 /src/app/_legacy
 TODO
-*.py
+/OTP utils
