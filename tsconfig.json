@@ -22,15 +22,10 @@
       "@/*": ["./src/*"],
       // Added a bunch of simpler imports that lead to index.js files.
       "@assets": ["./src/assets"],
-      "@assets/legacy/*": ["./src/app/_legacy/assets/"],
       "@interfaces": ["./src/interfaces"],
-      "@interfaces/legacy/*": ["./src/app/_legacy/interfaces/*"],
       "@logic": ["./src/components/logic"],
-      "@logic/legacy/*": ["./src/app/_legacy/components/(logic)/*"],
       "@ui": ["./src/components/ui"],
-      "@ui/legacy*": ["./src/app/_legacy/components/(ui)/*"],
       "@utils": ["./src/utils"],
-      "@utils/legacy/*": ["./src/app/_legacy/utils/*"],
       "@api": ["./src/app/api"]
     }
   },

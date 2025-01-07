@@ -7,7 +7,6 @@
 import { passwordProtectionStatus } from "@interfaces";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { checkPassword } from "@api";
 
 async function setCookie(
   cookieName: string,
@@ -31,7 +30,18 @@ export async function POST(req: Request) {
   const dev_password = process.env.ACCESS_PASSWORD;
   const dev_bypass = attempt === dev_password;
 
-  const check = await checkPassword(attempt);
+  // The URL for this can't be relational. The environmental variable spells out the URL so that it can be different in dev testing than in deployment.
+  const apiURL = process.env.CORE_URL;
+  const response = await fetch(`${apiURL}/api/history`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password: attempt,
+    }),
+  });
+  const check = await response.json();
   const { success } = await check.json();
 
   if (success || dev_bypass) {
