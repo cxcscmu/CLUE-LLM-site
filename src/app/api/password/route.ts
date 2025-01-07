@@ -29,12 +29,12 @@ export async function POST(req: Request) {
   const { attempt, cookieName, cookieTime } = await req.json();
 
   const dev_password = process.env.ACCESS_PASSWORD;
-  const dev_bypass = (attempt === dev_password);
+  const dev_bypass = attempt === dev_password;
 
   const check = await checkPassword(attempt);
-  const { success } = await check.json()
+  const { success } = await check.json();
 
-  if ( success || dev_bypass ) {
+  if (success || dev_bypass) {
     // Set the specified cookie for the given time.
     await setCookie(cookieName, cookieTime, "true");
   } else {
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
   }
 
   // Returns true if the log-in was successful.
-  return NextResponse.json({ isCorrect: (success || dev_bypass) });
+  return NextResponse.json({ isCorrect: success || dev_bypass });
 }
 
 export async function PUT(req: Request) {

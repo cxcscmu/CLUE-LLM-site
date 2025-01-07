@@ -57,7 +57,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  // This needs to connect to the Neon database and get a list of all unused passwords, then mark one of them as used and return that password.
+  // This needs to connect to the Neon database and get a list of all reserved passwords, then mark one of them as given and return that password.
 
   try {
     const client = new Client({
@@ -69,24 +69,24 @@ export async function GET() {
     const query = `SELECT * FROM clue_llm."Passwords" WHERE given = false;`;
     const result = await client.query(query);
 
-    if ( result.rowCount ) {
-      const rows = result.rows
+    if (result.rowCount) {
+      const rows = result.rows;
       const randomIndex = Math.floor(Math.random() * rows.length);
       const password = rows[randomIndex].password;
 
-      const update = `UPDATE clue_llm."Passwords" SET given = True WHERE password = $1`
-      const update_result = await client.query(update, [password])
-      
-      await client.end()
-      return NextResponse.json({password: password});
+      const update = `UPDATE clue_llm."Passwords" SET given = True WHERE password = $1`;
+      const update_result = await client.query(update, [password]);
+
+      await client.end();
+      return NextResponse.json({ password: password });
     } else {
-      await client.end()
-      return NextResponse.json({success: false});
+      await client.end();
+      return NextResponse.json({ success: false });
     }
 
     await client.end();
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return NextResponse.json(
       {
         success: false,
@@ -111,22 +111,22 @@ export async function checkPassword(password: string) {
     WHERE password = $1;`;
     const result = await client.query(query, [password]);
     // console.log(result)
-    if ( result.rowCount ) {
-      const row = result.rows[0]
+    if (result.rowCount) {
+      const row = result.rows[0];
       // console.log(row)
 
       if (!row.used && row.given) {
-        const update = `UPDATE clue_llm."Passwords" SET used = True WHERE password = $1`
-        const update_result = await client.query(update, [password])
-        await client.end()
-        return NextResponse.json({success: true});
+        const update = `UPDATE clue_llm."Passwords" SET used = True WHERE password = $1`;
+        const update_result = await client.query(update, [password]);
+        await client.end();
+        return NextResponse.json({ success: true });
       } else {
-        await client.end()
-        return NextResponse.json({success: false});
+        await client.end();
+        return NextResponse.json({ success: false });
       }
     } else {
-      await client.end()
-      return NextResponse.json({success: false});
+      await client.end();
+      return NextResponse.json({ success: false });
     }
   } catch (e) {
     console.log(e);
