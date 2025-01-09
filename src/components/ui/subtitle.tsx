@@ -1,6 +1,6 @@
 import { ReactNode, FC } from "react";
 
-export const Instructions: FC<{
+export const Subtitle: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   return (

@@ -34,7 +34,9 @@ export const FunctionButton: FC<{
       onClick={onClick}
       disabled={disabled}
     >
-      {children}
+      <div className="select-none">
+        {children}
+      </div>
     </button>
   );
 };

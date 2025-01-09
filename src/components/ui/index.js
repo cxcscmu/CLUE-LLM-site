@@ -2,7 +2,8 @@ export { Footer } from "./footer";
 export { Logo } from "./logo";
 export { Loader } from "./loader";
 export { FunctionButton } from "./function-button";
-export { Instructions } from "./instructions";
+export { Subtitle } from "./subtitle";
+export { FAQ } from "./FAQ";
 
 export { Label } from "./forms/label";
 export { TextInput } from "./forms/text-input";

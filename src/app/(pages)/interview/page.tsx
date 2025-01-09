@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Instructions, Logo } from "@ui";
+import { Footer, Subtitle, Logo, FAQ } from "@ui";
 import {
   getHistory,
   interviewModels,
@@ -67,9 +67,9 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
-          <Instructions>
+          <Subtitle>
             Be interviewed about the previous conversation.
-          </Instructions>
+          </Subtitle>
           <Selector
             label="Select Model:"
             values={interviewModels}
@@ -90,6 +90,7 @@ export default function Home() {
           {/* Contains the chatlog and message-sending components. See components/conversation */}
           <Footer />
           {/* Adds a disclaimer to the bottom of the screen. See components/footer */}
+          <FAQ />
         </div>
       </div>
     </Protected>

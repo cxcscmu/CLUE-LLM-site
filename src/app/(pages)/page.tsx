@@ -5,7 +5,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Label, Logo, SubmitButton, TextInput } from "@ui";
+import { FAQ, Label, Logo, SubmitButton, Subtitle, TextInput } from "@ui";
 import { setHistory } from "@utils";
 // import { GetPasswordTest } from "@logic/legacy/getPasswordTest";
 
@@ -19,6 +19,7 @@ export default function Home() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setStatus("Checking your password...")
     const response = await fetch("api/password", {
       method: "POST",
       headers: {
@@ -64,13 +65,9 @@ export default function Home() {
     >
       <div className="relative flex flex-col gap-2 px-4">
         <Logo />
-        <div
-          className="text-center
-            text-zinc-500
-            dark:text-zinc-400"
-        >
+        <Subtitle>
           <i>{status}</i>
-        </div>
+        </Subtitle>
         <form onSubmit={(e) => handleSubmit(e)} autoComplete="off">
           <Label label="login-bar">
             <TextInput
@@ -94,6 +91,7 @@ export default function Home() {
         </form>
         {/* <GetPasswordTest /> */}
       </div>
+      <FAQ />
     </div>
   );
 }

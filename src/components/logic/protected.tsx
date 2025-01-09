@@ -63,9 +63,8 @@ export const Protected: FC<{
     return () => clearInterval(intervalID);
   });
 
-  // TODO: Implement a loading spinner for while the thing is initially fething the cookies.
   if (accessible === undefined) {
-    return <Loader displayText="Checking password..." />;
+    return <Loader displayText="Loading..." />;
   } else if (accessible) {
     return <div> {children} </div>;
   } else

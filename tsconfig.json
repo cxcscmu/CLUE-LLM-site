@@ -19,14 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      // Added a bunch of simpler imports that lead to index.js files.
       "@assets": ["./src/assets"],
       "@interfaces": ["./src/interfaces"],
       "@logic": ["./src/components/logic"],
       "@ui": ["./src/components/ui"],
       "@utils": ["./src/utils"],
-      "@api": ["./src/app/api"]
+      "@api": ["./src/app/api"],
+      "@/*": ["./src/*"],
     }
   },
   "include": [
