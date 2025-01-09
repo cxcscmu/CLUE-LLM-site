@@ -25,7 +25,7 @@
       "@ui": ["./src/components/ui"],
       "@utils": ["./src/utils"],
       "@api": ["./src/app/api"],
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": [

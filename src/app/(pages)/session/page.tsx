@@ -58,9 +58,7 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
-          <Subtitle>
-            Chat with a model for 10-15 minutes
-          </Subtitle>
+          <Subtitle>Chat with a model for 10-15 minutes</Subtitle>
           <Selector
             label="Select Model:"
             values={sessionModels}

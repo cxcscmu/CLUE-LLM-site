@@ -19,7 +19,7 @@ export default function Home() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setStatus("Checking your password...")
+    setStatus("Checking your password...");
     const response = await fetch("api/password", {
       method: "POST",
       headers: {

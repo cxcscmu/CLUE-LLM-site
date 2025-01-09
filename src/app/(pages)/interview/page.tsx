@@ -67,9 +67,7 @@ export default function Home() {
           {/* stacks the contents on top of each other*/}
           <Logo />
           {/* Icon, title, and 'alpha' label. See components/logo */}
-          <Subtitle>
-            Be interviewed about the previous conversation.
-          </Subtitle>
+          <Subtitle>Be interviewed about the previous conversation.</Subtitle>
           <Selector
             label="Select Model:"
             values={interviewModels}
