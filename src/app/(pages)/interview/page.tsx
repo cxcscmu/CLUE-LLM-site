@@ -1,11 +1,11 @@
-// This page implements - under a <protected> component - the chat that will interview the user about their previous conversation.
+// This page implements - under a <Protected> component - the chat that will interview the user about their previous conversation.
 
 "use client";
 import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Subtitle, Logo, FAQ } from "@ui";
+import { Footer, Subtitle, Logo, FAQ, Centered } from "@ui";
 import {
   getHistory,
   interviewModels,
@@ -13,7 +13,9 @@ import {
   systemPrompt,
 } from "@utils";
 
+// This function is called when the button to end the interview early is pushed.
 async function endInterview() {
+  // api/password/PUT deletes a cookie, locking an unlocked page.
   const response = await fetch("api/password", {
     method: "PUT",
     headers: {
@@ -26,8 +28,9 @@ async function endInterview() {
   });
 }
 
+// This function is called by <protected> when the page is locked after having been accessible.
 async function neonCaller() {
-  // neon's POST submits a set of chatlogs to a neon database.
+  // After fetching a copy of the chat history, it submits it to the NEON database.
   const hist = getHistory();
   const response = await fetch("api/neon", {
     method: "POST",
@@ -36,6 +39,7 @@ async function neonCaller() {
     },
     body: JSON.stringify({ hist: hist }),
   });
+  // It submits the response to the logs in case of errors.
   const { message } = await response.json();
   console.log(message);
 }
@@ -43,26 +47,18 @@ async function neonCaller() {
 export default function Home() {
   const [LLM, setLLM] = useState(interviewModels[0].value);
 
-  // URItoHist();
-
   // The <protected> component takes this as an argument to display that text after the cookie expires. The function gets run a single time after it expires.
   const redirect: redirector = {
     reportText:
       "Your interview session has expired. You may now close the page.",
     nextPage: "/",
     nextPageText: "",
-    func: neonCaller,
+    func: neonCaller, // Defined above.
   };
 
   return (
     <Protected redirect={redirect} cookieName="interviewUnlocked">
-      <div
-        className="
-          absolute inset-0 min-h-[500px] flex items-center justify-center
-          bg-zinc-100
-          dark:bg-zinc-900"
-      >
-        {/* keeps the contents justified in the center of the screen */}
+      <Centered>
         <div className="relative flex flex-col gap-2 px-4">
           {/* stacks the contents on top of each other*/}
           <Logo />
@@ -90,7 +86,7 @@ export default function Home() {
           {/* Adds a disclaimer to the bottom of the screen. See components/footer */}
           <FAQ />
         </div>
-      </div>
+      </Centered>
     </Protected>
   );
 }

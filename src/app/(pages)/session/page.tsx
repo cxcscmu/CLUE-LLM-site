@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Subtitle, Logo, FAQ } from "@ui";
+import { Footer, Subtitle, Logo, FAQ, Centered } from "@ui";
 import { sessionModels } from "@utils";
 
 async function toNextPage() {
@@ -47,12 +47,7 @@ export default function Home() {
 
   return (
     <Protected redirect={redirect} cookieName="chatUnlocked">
-      <div
-        className="
-          absolute inset-0 min-h-[500px] flex items-center justify-center
-          bg-zinc-100
-          dark:bg-zinc-900"
-      >
+      <Centered>
         {/* keeps the contents justified in the center of the screen */}
         <div className="relative flex flex-col gap-2 px-4">
           {/* stacks the contents on top of each other*/}
@@ -79,7 +74,7 @@ export default function Home() {
           {/* Adds a disclaimer to the bottom of the screen. See components/footer */}
           <FAQ />
         </div>
-      </div>
+      </Centered>
     </Protected>
   );
 }

@@ -1,10 +1,13 @@
-export { Footer } from "./footer";
-export { Logo } from "./logo";
-export { Loader } from "./loader";
-export { FunctionButton } from "./function-button";
-export { Subtitle } from "./subtitle";
-export { FAQ } from "./FAQ";
-
 export { Label } from "./forms/label";
 export { TextInput } from "./forms/text-input";
 export { SubmitButton } from "./forms/submit-button";
+
+export { FAQ } from "./prebuilt/FAQ";
+export { Footer } from "./prebuilt/footer";
+export { Logo } from "./prebuilt/logo";
+export { Loader } from "./prebuilt/loader";
+
+export { Centered } from "./structure/centered";
+
+export { FunctionButton } from "./function-button";
+export { Subtitle } from "./subtitle";

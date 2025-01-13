@@ -5,7 +5,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { FAQ, Label, Logo, SubmitButton, Subtitle, TextInput } from "@ui";
+import { Centered, FAQ, Label, Logo, SubmitButton, Subtitle, TextInput } from "@ui";
 import { setHistory } from "@utils";
 // import { GetPasswordTest } from "@logic/legacy/getPasswordTest";
 
@@ -57,12 +57,7 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="
-        absolute inset-0 min-h-[500px] flex items-center justify-center
-        bg-zinc-100
-        dark:bg-zinc-900"
-    >
+    <Centered>
       <div className="relative flex flex-col gap-2 px-4">
         <Logo />
         <Subtitle>
@@ -92,6 +87,6 @@ export default function Home() {
         {/* <GetPasswordTest /> */}
       </div>
       <FAQ />
-    </div>
+    </Centered>
   );
 }
