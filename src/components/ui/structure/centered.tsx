@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react"
+import { FC, ReactNode } from "react";
 
 export const Centered: FC<{
   children: ReactNode;
@@ -10,7 +10,7 @@ export const Centered: FC<{
         bg-zinc-100
         dark:bg-zinc-900"
     >
-      { children }
+      {children}
     </div>
-  )
-}
+  );
+};

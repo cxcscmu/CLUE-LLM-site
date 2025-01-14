@@ -5,7 +5,16 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Centered, FAQ, Label, Logo, Stacked, SubmitButton, Subtitle, TextInput } from "@ui";
+import {
+  Centered,
+  FAQ,
+  Label,
+  Logo,
+  Stacked,
+  SubmitButton,
+  Subtitle,
+  TextInput,
+} from "@ui";
 import { setHistory } from "@utils";
 
 export default function Home() {

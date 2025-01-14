@@ -10,7 +10,7 @@ import { sessionModels } from "@utils";
 
 // This function is called by <Protected> when the page is locked after having been accessible.
 async function toNextPage() {
-  // It sets the interviewUnlocked cookie to make the interview page accessible. 
+  // It sets the interviewUnlocked cookie to make the interview page accessible.
   await fetch("api/password", {
     method: "Put",
     headers: {
@@ -54,9 +54,7 @@ export default function Home() {
       <Centered>
         <Stacked>
           <Logo />
-          <Subtitle>
-            Chat with a model for 10-15 minutes
-          </Subtitle>
+          <Subtitle>Chat with a model for 10-15 minutes</Subtitle>
           <Selector
             label="Select Model:"
             values={sessionModels}

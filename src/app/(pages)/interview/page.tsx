@@ -61,9 +61,7 @@ export default function Home() {
       <Centered>
         <Stacked>
           <Logo />
-          <Subtitle>
-            Be interviewed about the previous conversation.
-          </Subtitle>
+          <Subtitle>Be interviewed about the previous conversation.</Subtitle>
           <Selector
             label="Select Model:"
             values={interviewModels}
