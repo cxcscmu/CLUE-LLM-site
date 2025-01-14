@@ -5,9 +5,8 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Centered, FAQ, Label, Logo, SubmitButton, Subtitle, TextInput } from "@ui";
+import { Centered, FAQ, Label, Logo, Stacked, SubmitButton, Subtitle, TextInput } from "@ui";
 import { setHistory } from "@utils";
-// import { GetPasswordTest } from "@logic/legacy/getPasswordTest";
 
 export default function Home() {
   const [password, setPassword] = useState("");
@@ -58,7 +57,7 @@ export default function Home() {
 
   return (
     <Centered>
-      <div className="relative flex flex-col gap-2 px-4">
+      <Stacked>
         <Logo />
         <Subtitle>
           <i>{status}</i>
@@ -84,8 +83,7 @@ export default function Home() {
             <SubmitButton disabled={!Boolean(password)} />
           </Label>
         </form>
-        {/* <GetPasswordTest /> */}
-      </div>
+      </Stacked>
       <FAQ />
     </Centered>
   );

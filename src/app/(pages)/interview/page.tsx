@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
 import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Subtitle, Logo, FAQ, Centered } from "@ui";
+import { Footer, Subtitle, Logo, FAQ, Centered, Stacked } from "@ui";
 import {
   getHistory,
   interviewModels,
@@ -15,7 +15,7 @@ import {
 
 // This function is called when the button to end the interview early is pushed.
 async function endInterview() {
-  // api/password/PUT deletes a cookie, locking an unlocked page.
+  // It deletes the interviewUnlocked cookie, making the page inaccessible.
   const response = await fetch("api/password", {
     method: "PUT",
     headers: {
@@ -28,7 +28,7 @@ async function endInterview() {
   });
 }
 
-// This function is called by <protected> when the page is locked after having been accessible.
+// This function is called by <Protected> when the page is locked after having been accessible.
 async function neonCaller() {
   // After fetching a copy of the chat history, it submits it to the NEON database.
   const hist = getHistory();
@@ -59,18 +59,18 @@ export default function Home() {
   return (
     <Protected redirect={redirect} cookieName="interviewUnlocked">
       <Centered>
-        <div className="relative flex flex-col gap-2 px-4">
-          {/* stacks the contents on top of each other*/}
+        <Stacked>
           <Logo />
-          {/* Icon, title, and 'alpha' label. See components/logo */}
-          <Subtitle>Be interviewed about the previous conversation.</Subtitle>
+          <Subtitle>
+            Be interviewed about the previous conversation.
+          </Subtitle>
           <Selector
             label="Select Model:"
             values={interviewModels}
             target={LLM}
             setFunc={setLLM}
           />
-          {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. See components/selector */}
+          {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. */}
           <Conversation
             LLM={LLM}
             placeholder="Respond here."
@@ -81,11 +81,10 @@ export default function Home() {
             skipMessage="You may now end the interview, if it's complete."
             skipFunction={endInterview}
           />
-          {/* Contains the chatlog and message-sending components. See components/conversation */}
+          {/* Contains the chatlog and message-sending components. */}
           <Footer />
-          {/* Adds a disclaimer to the bottom of the screen. See components/footer */}
           <FAQ />
-        </div>
+        </Stacked>
       </Centered>
     </Protected>
   );

@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { Chatlog, ChatMessage } from "@logic";
 import { displayTime, getHistory, setHistory } from "@utils";
 import { conversation } from "@interfaces";
-import { FunctionButton } from "../ui";
+import { FunctionButton } from "@ui";
 
 export const Conversation: FC<{
   LLM: string;

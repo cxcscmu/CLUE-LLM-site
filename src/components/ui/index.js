@@ -8,6 +8,7 @@ export { Logo } from "./prebuilt/logo";
 export { Loader } from "./prebuilt/loader";
 
 export { Centered } from "./structure/centered";
+export { Stacked } from "./structure/stacked"
 
 export { FunctionButton } from "./function-button";
 export { Subtitle } from "./subtitle";
