@@ -24,7 +24,7 @@ export const Chatlog: FC<{
       >
         {chatLog.map(
           (item, index) =>
-            item.content && (
+            item.content && (typeof item.content === "string") && (
               <div
                 className={clsx(
                   "my-2 px-5 py-2 w-10/12 outline-none border border-zinc-100 rounded-lg shadow-md bg-white",
