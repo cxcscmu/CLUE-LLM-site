@@ -5,8 +5,8 @@
 import { createOpenAI, openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
-import { streamText, tool } from "ai";
-import { z } from "zod";
+import { streamText } from "ai";
+// import { z } from "zod";
 
 // Helps prevent the request from timing out.
 export const maxDuration = 30;

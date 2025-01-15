@@ -124,10 +124,8 @@ export const Conversation: FC<{
           onClick={skipFunction}
           disabled={
             process.env.NODE_ENV != "development" &&
-            (
-              Boolean(messages.length <= initialMessages.length + 1) ||
-              Boolean(buttonCounter)
-            )
+            (Boolean(messages.length <= initialMessages.length + 1) ||
+              Boolean(buttonCounter))
           }
           labeled={false}
         >

@@ -46,7 +46,7 @@ async function neonCaller() {
 
 export default function Home() {
   const [LLM, setLLM] = useState(interviewModels[0].value);
-  const hist = getHistory()
+  const hist = getHistory();
 
   // The <protected> component takes this as an argument to display that text after the cookie expires. The function gets run a single time after it expires.
   const redirect: redirector = {
