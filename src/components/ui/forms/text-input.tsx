@@ -11,6 +11,7 @@ export const TextInput: FC<{
   placeholder?: string;
   disabled?: boolean;
   disabledPlaceholder?: string;
+  border?: boolean;
 }> = ({
   id,
   value,
@@ -18,6 +19,7 @@ export const TextInput: FC<{
   placeholder = "Type here...",
   disabled = false,
   disabledPlaceholder = "",
+  border = true,
 }) => {
   return (
     <input
@@ -27,10 +29,10 @@ export const TextInput: FC<{
       placeholder={disabled ? disabledPlaceholder : placeholder}
       autoFocus
       disabled={disabled}
-      className="
-        px-2 pr-6 w-full rounded-md flex-1 outline-none bg-white
-        disabled:opacity-50 disabled:select-none
-      "
+      className={`
+        pr-6 w-full rounded-md flex-1 outline-none bg-zinc-100 text-black dark:text-white dark:bg-zinc-800 placeholder-zinc-500 dark:placeholder-zinc-300
+        disabled:opacity-50 disabled:select-none disabled:placeholder-zinc-400 
+      ${border ? "px-2" : ""}`}
     />
   );
 };

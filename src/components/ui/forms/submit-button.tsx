@@ -10,7 +10,7 @@ export const SubmitButton: FC<{
 }> = ({ disabled = false }) => {
   return (
     <FunctionButton submit={true} disabled={disabled}>
-      <ArrowBigRight size={16} />
+      <ArrowBigRight className="text-white dark:text-black" size={16} />
     </FunctionButton>
   );
 };

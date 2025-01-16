@@ -6,10 +6,11 @@ import { ReactNode, FC } from "react";
 export const Label: FC<{
   children: ReactNode;
   label: string;
-}> = ({ children, label }) => {
+  border?: boolean;
+}> = ({ children, label, border = true }) => {
   return (
     <label
-      className="relative bg-white flex items-center justify-center border py-2 px-2 rounded-lg gap-2 my-4 focus-within:border-zinc-300 shadow-md min-w-96"
+      className={`relative flex items-center justify-center rounded-lg mb-4 focus-within:border-zinc-300 min-w-96 ${border ? "border border-zinc-300 focus-within:border-zinc-300 py-2 px-2 gap-2" : ""}`}
       htmlFor={label}
     >
       {children}

@@ -25,12 +25,13 @@ export const ChatMessage: FC<{
         }
         autoComplete="off"
       >
-        <Label label="chat-bar">
+        <Label label="chat-bar" border={false}>
           <TextInput
             id="chat-bar"
             value={input}
             onChange={handleInputChange}
             placeholder={placeholder}
+            border={false}
           />
           <SubmitButton />
         </Label>

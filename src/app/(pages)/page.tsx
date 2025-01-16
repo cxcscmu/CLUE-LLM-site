@@ -67,32 +67,33 @@ export default function Home() {
   return (
     <Centered>
       <Stacked>
-        <Logo />
-        <Subtitle>
-          <i>{status}</i>
-        </Subtitle>
+        <Subtitle>Getting Started</Subtitle>
+        <p className="text-center dark:text-zinc-100">{status}</p>
         <form onSubmit={(e) => handleSubmit(e)} autoComplete="off">
-          <Label label="login-bar">
-            <TextInput
-              id="login-bar"
-              value={workerID}
-              onChange={(e: any) => setWorkerID(e.target.value)}
-              placeholder="Enter your Worker ID here..."
-            />
-          </Label>
-          <Label label="chat-bar">
-            <TextInput
-              id="chat-bar"
-              value={password}
-              onChange={(e: any) => setPassword(e.target.value)}
-              placeholder="Enter the provided password here..."
-              disabled={!Boolean(workerID)}
-              disabledPlaceholder="Enter your Worker ID first."
-            />
-            <SubmitButton disabled={!Boolean(password)} />
-          </Label>
+          <div className="bg-zinc-100 dark:bg-zinc-800 px-5 pt-7 pb-5 mt-2 rounded-lg">
+            <Label label="login-bar">
+              <TextInput
+                id="login-bar"
+                value={workerID}
+                onChange={(e: any) => setWorkerID(e.target.value)}
+                placeholder="Enter your Worker ID here..."
+              />
+            </Label>
+            <Label label="chat-bar">
+              <TextInput
+                id="chat-bar"
+                value={password}
+                onChange={(e: any) => setPassword(e.target.value)}
+                placeholder="Enter the provided password here..."
+                disabled={!Boolean(workerID)}
+                disabledPlaceholder="Enter your Worker ID first."
+              />
+              <SubmitButton disabled={!Boolean(password)} />
+            </Label>
+          </div>
         </form>
       </Stacked>
+      <Logo />
       <FAQ />
     </Centered>
   );

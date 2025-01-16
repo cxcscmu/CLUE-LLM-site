@@ -4,7 +4,7 @@ export const Subtitle: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   return (
-    <div className="text-center font-medium text-l text-zinc-600 relative text-nowrap dark:text-zinc-400">
+    <div className="text-center font-medium text-2xl text-black dark:text-white relative">
       {children}
     </div>
   );

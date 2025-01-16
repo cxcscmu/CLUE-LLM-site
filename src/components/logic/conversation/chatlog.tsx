@@ -4,6 +4,8 @@
 import { FC, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Message } from "ai";
+import { MessageCircleQuestion } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 export const Chatlog: FC<{
   chatLog: Message[];
@@ -18,28 +20,34 @@ export const Chatlog: FC<{
     return (
       <div
         className="
-        px-4 w-full outline-none border rounded-lg max-w-5xl max-h-96 shadow-inner overflow-auto
-        bg-zinc-200 border-zinc-300
-        dark:bg-zinc-600 dark:border-zinc-700"
+        fixed top-16 w-full md:w-2/3 pr-7 pb-10 bottom-[calc(12.5rem)] outline-none rounded-lg overflow-y-auto
+        bg-white
+        dark:bg-zinc-900 dark:border-zinc-700"
       >
         {chatLog.map(
           (item, index) =>
             item.content &&
             typeof item.content === "string" && (
-              <div
-                className={clsx(
-                  "my-2 px-5 py-2 w-10/12 outline-none border border-zinc-100 rounded-lg shadow-md bg-white",
-                  {
-                    "ml-auto": item.role === "user",
-                  },
-                )}
-                key={index}
-              >
-                <b>{item.role.toUpperCase()}</b>
-                {item.content.split("\n").map((line, i) => (
-                  <p key={index + "_" + i}> {line} </p>
-                ))}
-              </div>
+              <>
+                <div className="flex flex-row">
+                  {item.role !== "user" && (
+                    <div className="h-10 mt-4 mr-2 dark:text-zinc-100">
+                      <MessageCircleQuestion />
+                    </div>
+                  )}
+                  <div
+                    className={clsx(
+                      "my-2 px-5 py-2 w-fit max-w-[75%] outline-none border border-zinc-100 rounded-xl bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-800 text-black dark:text-zinc-100",
+                      {
+                        "ml-auto text-right": item.role === "user",
+                      },
+                    )}
+                    key={index}
+                  >
+                    <ReactMarkdown>{item.content}</ReactMarkdown>
+                  </div>
+                </div>
+              </>
             ),
         )}
         <div ref={chatEndRef}></div>

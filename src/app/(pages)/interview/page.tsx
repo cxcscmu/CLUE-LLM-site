@@ -60,8 +60,8 @@ export default function Home() {
   return (
     <Protected redirect={redirect} cookieName="interviewUnlocked">
       <Centered>
+        <Logo />
         <Stacked>
-          <Logo />
           <Subtitle>Be interviewed about the previous conversation.</Subtitle>
           <Selector
             label="Select Model:"
@@ -71,7 +71,6 @@ export default function Home() {
           />
           {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. */}
           <Conversation
-            LLM={LLM}
             placeholder="Respond here."
             system={systemPrompt}
             logLabel="interview"

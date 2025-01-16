@@ -7,13 +7,13 @@ import { useChat } from "ai/react";
 import { ArrowBigRightDash } from "lucide-react";
 import clsx from "clsx";
 
-import { Chatlog, ChatMessage } from "@logic";
+import { Chatlog, ChatMessage, Selector } from "@logic";
 import { displayTime, getHistory, setHistory } from "@utils";
 import { conversation } from "@interfaces";
-import { FunctionButton } from "@ui";
+import { FunctionButton, Subtitle } from "@ui";
+import { sessionModels } from "@utils";
 
 export const Conversation: FC<{
-  LLM: string;
   placeholder?: string;
   system?: string;
   logLabel: "session" | "interview";
@@ -21,8 +21,8 @@ export const Conversation: FC<{
   skipAccessTime?: number;
   skipMessage?: string;
   skipFunction?: MouseEventHandler;
+  setLLM?: (value: string) => void;
 }> = ({
-  LLM,
   placeholder = "Type here...",
   system,
   logLabel,
@@ -34,6 +34,8 @@ export const Conversation: FC<{
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages: initialMessages as Message[],
   });
+
+  const [LLM, setLLM] = useState(sessionModels[0].value);
 
   useEffect(() => {
     const updateHist = async () => {
@@ -137,17 +139,34 @@ export const Conversation: FC<{
 
   return (
     <div>
+      {messages.length == 0 && (
+        <Subtitle>Chat with a model for 10-15 minutes</Subtitle>
+      )}
       <Chatlog chatLog={messages} />
 
-      <ChatMessage
-        handleSubmit={handleSubmit}
-        modelVars={modelVars}
-        input={input}
-        handleInputChange={handleInputChange}
-        placeholder={placeholder}
-      />
+      <div
+        className={`${messages.length == 0 ? "" : "fixed bottom-10 w-full pr-7 md:w-2/3"}`}
+      >
+        <div className="p-5 bg-zinc-100 dark:bg-zinc-800 rounded-xl mt-3 mb-2">
+          {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. */}
+          <ChatMessage
+            handleSubmit={handleSubmit}
+            modelVars={modelVars}
+            input={input}
+            handleInputChange={handleInputChange}
+            placeholder={placeholder}
+          />
 
-      {skip}
+          {/* Contains the chatlog and message-sending components. */}
+          <Selector
+            label="Model:"
+            values={sessionModels}
+            target={LLM}
+            setFunc={setLLM}
+          />
+        </div>
+        {skip}
+      </div>
     </div>
   );
 };
