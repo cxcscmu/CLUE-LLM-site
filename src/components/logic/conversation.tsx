@@ -2,7 +2,8 @@
 
 "use client";
 import { FC, MouseEventHandler, useEffect, useState } from "react";
-import { Message, useChat } from "ai/react";
+import { CoreMessage, Message } from "ai";
+import { useChat } from "ai/react";
 import { ArrowBigRightDash } from "lucide-react";
 import clsx from "clsx";
 
@@ -16,7 +17,7 @@ export const Conversation: FC<{
   placeholder?: string;
   system?: string;
   logLabel: "session" | "interview";
-  initialMessages?: Message[];
+  initialMessages?: CoreMessage[];
   skipAccessTime?: number;
   skipMessage?: string;
   skipFunction?: MouseEventHandler;
@@ -31,7 +32,7 @@ export const Conversation: FC<{
   skipFunction,
 }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    initialMessages: initialMessages,
+    initialMessages: initialMessages as Message[],
   });
 
   const [LLM, setLLM] = useState(sessionModels[0].value);
@@ -124,8 +125,9 @@ export const Conversation: FC<{
         <FunctionButton
           onClick={skipFunction}
           disabled={
-            Boolean(messages.length <= initialMessages.length + 1) ||
-            Boolean(buttonCounter)
+            process.env.NODE_ENV != "development" &&
+            (Boolean(messages.length <= initialMessages.length + 1) ||
+              Boolean(buttonCounter))
           }
           labeled={false}
         >
