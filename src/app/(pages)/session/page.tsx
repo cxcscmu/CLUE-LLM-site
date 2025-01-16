@@ -53,7 +53,7 @@ export default function Home() {
           <Conversation
             placeholder="Chat with me!"
             logLabel="session"
-            skipAccessTime={10}
+            skipAccessTime={600}
             skipMessage="You may now end the conversation early, if you wish."
             skipFunction={toNextPage}
           />
