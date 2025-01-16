@@ -49,9 +49,9 @@ const Deepseek_V3: selection = {
 export const sessionModels: selection[] = [
   OPENAI_GPT_4o,
   // Anthropic_Claude_Sonnet,
-  Gemini_1_5_Flash
+  Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
-  // Deepseek_V3,
+  Deepseek_V3,
 ];
 
 export const interviewModels: selection[] = [
