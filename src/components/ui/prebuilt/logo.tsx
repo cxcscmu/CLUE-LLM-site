@@ -12,7 +12,16 @@ export const Logo: FC<{
       {/* This keeps the three pieces aligned in a row. */}
       <div className="h-fit dark:text-zinc-100">
         {/* This div keeps the size of the icon reasonable */}
-        <Image width={32} height={32} src="/images/cmu-scotty.png" alt="logo" />
+        <Image
+          width={32}
+          height={32}
+          src={
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "/images/cmu-scotty-dark.png"
+              : "/images/cmu-scotty.png"
+          }
+          alt="Scotty Logo"
+        />
         {/* placeholder icon */}
       </div>
       <div className="text-center font-medium text-xl mr--1 md:text-2xl text-zinc-900 relative text-nowrap dark:text-zinc-100">

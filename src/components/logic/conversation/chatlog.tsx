@@ -31,12 +31,17 @@ export const Chatlog: FC<{
               <>
                 <div className="flex flex-row">
                   {item.role !== "user" && (
-                    <div className="h-10 mt-3 mr-2 dark:text-zinc-100">
+                    <div className="h-10 mt-3 mr-2">
                       <Image
                         width={32}
                         height={32}
-                        src="/images/cmu-scotty.png"
-                        alt="logo"
+                        src={
+                          window.matchMedia("(prefers-color-scheme: dark)")
+                            .matches
+                            ? "/images/cmu-scotty-dark.png"
+                            : "/images/cmu-scotty.png"
+                        }
+                        alt="Scotty Logo"
                       />
                     </div>
                   )}
