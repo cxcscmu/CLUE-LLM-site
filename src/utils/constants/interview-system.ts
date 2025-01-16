@@ -1,13 +1,34 @@
-import { Message } from "ai";
+import { conversation } from "@interfaces";
+import { CoreMessage } from "ai";
 
-export const startMessage: Message[] = [
-  {
-    id: "0",
-    role: "assistant",
-    content:
-      "Hello! I'm here to interview you about your experience with the chatbot you just spoke to. Are you ready?",
-  },
-];
+const baseMessage: string =
+  "Hello! I'm here to interview you about your experience with the chatbot you just spoke to. Are you ready?";
+
+export const startMessage = (history: conversation) => {
+  const randID = `toolu_${Math.round(Math.random() * 10000)}`;
+  const hist = JSON.stringify(history.session);
+
+  const initialMessages: CoreMessage[] = [
+    {
+      role: "assistant",
+      content: [
+        {
+          type: "text",
+          text: "The chat history of the preceding conversation is as follows:",
+        },
+        {
+          type: "text",
+          text: hist,
+        },
+      ],
+    },
+    {
+      role: "assistant",
+      content: baseMessage,
+    },
+  ];
+  return initialMessages;
+};
 
 export const systemPrompt: string = `Instructions:
 You are a user experience (UX) researcher. You are going to design a UX interview and conduct the interview with a user. The product for the UX interview is a ChatBot. The user in this interview has just had a conversation with the ChatBot prior to this interview. The goal of the interview is to understand the user’s experience using the ChatBot, if the ChatBot successfully met their needs or solved their problems, and gather feedback on how to improve the ChatBot. Your interview flow and follow-up questions should be tailored to the user’s specific experiences and perspectives regarding using the ChatBot.

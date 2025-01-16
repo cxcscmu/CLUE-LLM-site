@@ -26,7 +26,8 @@ export const Chatlog: FC<{
       >
         {chatLog.map(
           (item, index) =>
-            item.content && (
+            item.content &&
+            typeof item.content === "string" && (
               <>
                 <div className="flex flex-row">
                   {item.role !== "user" && (
