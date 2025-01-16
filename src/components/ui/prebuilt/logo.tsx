@@ -15,11 +15,15 @@ export const Logo: FC<{
         <Image
           width={32}
           height={32}
-          src={
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "/images/cmu-scotty-dark.png"
-              : "/images/cmu-scotty.png"
-          }
+          src="/images/cmu-scotty.png"
+          className="dark:hidden"
+          alt="Scotty Logo"
+        />
+        <Image
+          width={32}
+          height={32}
+          src="/images/cmu-scotty-dark.png"
+          className="hidden dark:block"
           alt="Scotty Logo"
         />
         {/* placeholder icon */}
