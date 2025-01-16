@@ -4,8 +4,8 @@
 import { FC, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Message } from "ai";
-import { MessageCircleQuestion } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 export const Chatlog: FC<{
   chatLog: Message[];
@@ -31,8 +31,13 @@ export const Chatlog: FC<{
               <>
                 <div className="flex flex-row">
                   {item.role !== "user" && (
-                    <div className="h-10 mt-4 mr-2 dark:text-zinc-100">
-                      <MessageCircleQuestion />
+                    <div className="h-10 mt-3 mr-2 dark:text-zinc-100">
+                      <Image
+                        width={32}
+                        height={32}
+                        src="/images/cmu-scotty.png"
+                        alt="logo"
+                      />
                     </div>
                   )}
                   <div
