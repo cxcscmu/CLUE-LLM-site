@@ -19,10 +19,10 @@ export const Chatlog: FC<{
   if (chatLog.length) {
     return (
       <div
-        className="
-        fixed top-16 w-full md:w-2/3 pr-7 pb-10 bottom-[calc(12.5rem)] outline-none rounded-lg overflow-y-auto
+        className={`
+        fixed top-16 w-full md:w-2/3 pr-7 pb-10 ${process.env.NODE_ENV === "development" ? "bottom-[calc(12.5rem)]" : "bottom-[calc(10rem)]"} outline-none rounded-lg overflow-y-auto
         bg-white
-        dark:bg-zinc-900 dark:border-zinc-700"
+        dark:bg-zinc-900 dark:border-zinc-700`}
       >
         {chatLog.map(
           (item, index) =>
