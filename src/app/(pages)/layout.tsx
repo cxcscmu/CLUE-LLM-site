@@ -1,3 +1,5 @@
+// This sets the basic metadata for the site as a whole.
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
