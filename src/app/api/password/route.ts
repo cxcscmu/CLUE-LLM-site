@@ -32,16 +32,16 @@ export async function POST(req: Request) {
 
   // The URL for this can't be relational. The environmental variable spells out the URL so that it can be different in dev testing than in deployment.
   const apiURL = process.env.CORE_URL;
-  const response = await fetch(`${apiURL}/api/neon`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      password: attempt,
-    }),
-  });
-  const { success } = await response.json();
+  // const response = await fetch(`${apiURL}/api/neon`, {
+  //   method: "PUT",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     password: attempt,
+  //   }),
+  // });
+  const success = true;
 
   if (success || dev_bypass) {
     // Set the specified cookie for the given time.

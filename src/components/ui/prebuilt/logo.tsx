@@ -8,7 +8,7 @@ export const Logo: FC<{
   const title = `CLUE-LLM${label}`;
 
   return (
-    <div className="flex gap-4 items-center justify-center cursor-default select-none relative">
+    <div className="fixed gap-3 top-6 flex items-center justify-center cursor-default select-none">
       {/* This keeps the three pieces aligned in a row. */}
       <div className="h-fit dark:text-zinc-100">
         {/* This div keeps the size of the icon reasonable */}
@@ -16,7 +16,7 @@ export const Logo: FC<{
         <MessageCircleQuestion />
         {/* placeholder icon */}
       </div>
-      <div className="text-center font-medium text-2xl md:text-3xl text-zinc-900 relative text-nowrap dark:text-zinc-100">
+      <div className="text-center font-medium text-xl mr--1 md:text-2xl text-zinc-900 relative text-nowrap dark:text-zinc-100">
         {/* Sets the logo to be the right size. */}
         {title}
       </div>

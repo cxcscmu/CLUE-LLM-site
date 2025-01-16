@@ -1,12 +1,11 @@
 // This page implements - under a <Protected> component - the chat that the user will initially have with the chatbot.
 
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 import { redirector } from "@interfaces";
-import { Conversation, Protected, Selector } from "@logic";
-import { Footer, Subtitle, Logo, FAQ, Centered, Stacked } from "@ui";
-import { sessionModels } from "@utils";
+import { Conversation, Protected } from "@logic";
+import { Footer, Logo, FAQ, Centered, Stacked } from "@ui";
 
 // This function is called by <Protected> when the page is locked after having been accessible.
 async function toNextPage() {
@@ -37,8 +36,6 @@ async function toNextPage() {
 }
 
 export default function Home() {
-  const [LLM, setLLM] = useState(sessionModels[0].value);
-
   // The <protected> component takes this as an argument to display that text after the cookie expires. The function gets run a single time after it expires, then it automatically navigates to nextPage.
   const redirect: redirector = {
     reportText:
@@ -53,27 +50,17 @@ export default function Home() {
     <Protected redirect={redirect} cookieName="chatUnlocked">
       <Centered>
         <Stacked>
-          <Logo />
-          <Subtitle>Chat with a model for 10-15 minutes</Subtitle>
-          <Selector
-            label="Select Model:"
-            values={sessionModels}
-            target={LLM}
-            setFunc={setLLM}
-          />
-          {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. */}
           <Conversation
-            LLM={LLM}
             placeholder="Chat with me!"
             logLabel="session"
-            skipAccessTime={600}
+            skipAccessTime={10}
             skipMessage="You may now end the conversation early, if you wish."
             skipFunction={toNextPage}
           />
-          {/* Contains the chatlog and message-sending components. */}
           <Footer />
           <FAQ />
         </Stacked>
+        <Logo />
       </Centered>
     </Protected>
   );

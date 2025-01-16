@@ -75,8 +75,8 @@ export const Protected: FC<{
         bg-zinc-100
         dark:bg-zinc-900"
       >
+        <Logo />
         <div className="relative flex flex-col gap-2 px-4">
-          <Logo />
           <div
             className="text-center
             text-zinc-500

@@ -10,12 +10,14 @@ export const FunctionButton: FC<{
   submit?: boolean;
   disabled?: boolean;
   labeled?: boolean;
+  background?: boolean;
 }> = ({
   children,
   onClick = () => {},
   submit = false,
   disabled = false,
   labeled = true,
+  background = true,
 }) => {
   if (children === undefined) {
     children = <Squircle size={16} />;
@@ -25,10 +27,16 @@ export const FunctionButton: FC<{
     <button
       type={submit ? "submit" : "button"}
       className={clsx(
-        "w-auto py-1 px-2 active:enabled:scale-95 hover:enabled:scale-105 border overflow-hidden relative rounded-xl shadow-md disabled:opacity-50 bg-zinc-950 border-black text-zinc-100 fill-white",
+        "w-auto py-1 px-2 active:enabled:scale-95 hover:enabled:scale-105 border overflow-hidden relative rounded-xl disabled:opacity-50  text-zinc-100 fill-white",
         {
           "dark:bg-zinc-50 dark:border-white dark:text-zinc-900 dark:fill-zinc-50":
             !labeled,
+        },
+        {
+          "bg-zinc-950 dark:bg-zinc-50": background,
+        },
+        {
+          "border-none dark:bg-zinc-800": !background,
         },
       )}
       onClick={onClick}

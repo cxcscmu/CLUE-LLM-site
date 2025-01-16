@@ -21,16 +21,17 @@ export const Selector: FC<{
 
   if (process.env.NODE_ENV === "development") {
     return (
-      <div className="flex flex-row items-center justify-end">
+      <div className="flex flex-row items-center justify-start">
         {/* Keeps the label and selector in a single line. */}
-        <p className="select-none text-right dark:text-zinc-100">{label}</p>
+        <p className="text-sm select-none text-right dark:text-zinc-100">
+          {label}
+        </p>
         <select
           className="
-            text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mx-5
-            bg-zinc-600 border-black text-zinc-100
-            dark:bg-zinc-100 dark:border-zinc-200 dark:text-zinc-900 dark:focus:ring-blue-500 dark:focus:border-blue-500
+            text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 mx-2
+            bg-zinc-100 text-zinc-900 dark:text-zinc-100 dark:bg-zinc-800 dark:focus:ring-blue-500 dark:focus:border-blue-500
             disabled:bg-zinc-500 disabled:border-zinc-500 disabled:text-zinc-300
-            disabled:dark:text-zinc-800"
+            disabled:dark:text-zinc-300"
           value={target}
           onChange={(e) => setFunc(e.target.value)}
         >
@@ -42,8 +43,12 @@ export const Selector: FC<{
             </option>
           ))}
         </select>
-        <FunctionButton onClick={handleRandomize} labeled={false}>
-          <Dices size={20} className="mr-1" />
+        <FunctionButton
+          background={false}
+          onClick={handleRandomize}
+          labeled={false}
+        >
+          <Dices size={20} className="text-black dark:text-zinc-100" />
         </FunctionButton>
       </div>
     );

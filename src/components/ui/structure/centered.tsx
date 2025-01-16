@@ -7,7 +7,7 @@ export const Centered: FC<{
     <div
       className="
         absolute inset-0 min-h-[500px] flex items-center justify-center
-        bg-zinc-100
+        bg-white
         dark:bg-zinc-900"
     >
       {children}
