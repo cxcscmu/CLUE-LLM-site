@@ -28,7 +28,7 @@ export const Chatlog: FC<{
           (item, index) =>
             item.content &&
             typeof item.content === "string" && (
-              <>
+              <div key={index}>
                 <div className="flex flex-row">
                   {item.role !== "user" && (
                     <div className="h-10 mt-3 mr-2">
@@ -55,12 +55,11 @@ export const Chatlog: FC<{
                         "ml-auto text-right": item.role === "user",
                       },
                     )}
-                    key={index}
                   >
                     <ReactMarkdown>{item.content}</ReactMarkdown>
                   </div>
                 </div>
-              </>
+              </div>
             ),
         )}
         <div ref={chatEndRef}></div>

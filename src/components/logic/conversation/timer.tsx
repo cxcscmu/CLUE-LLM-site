@@ -14,11 +14,13 @@ export const Timer: FC<{
   const [time, setTime] = useState(maxTime);
   const [display, setDisplay] = useState(`You may end the conversation in ${displayTime(time)}`);
   let timerRef = useRef<number | null>(null);
-  let startTime = Date.now();
+  let startTime = 0;
 
   useEffect(() => {
     const updateTimer = async () => {
-      startTime = cookieName ? await cookieStatus(cookieName) as number : startTime
+      if ( !startTime ) {
+        startTime = cookieName ? await cookieStatus(cookieName) as number : Date.now();
+      }
       const timeSince = Math.floor((Date.now() - startTime) / 1000);
       const newTime = maxTime - timeSince;
       setTime(newTime);
