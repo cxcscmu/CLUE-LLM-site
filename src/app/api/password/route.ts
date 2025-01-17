@@ -45,7 +45,7 @@ export async function POST(req: Request) {
 
   if (success || dev_bypass) {
     // Set the specified cookie for the given time.
-    await setCookie(cookieName, cookieTime, "true");
+    await setCookie(cookieName, cookieTime, Date.now().toString());
   } else {
     // An unsuccessful password deletes that cookie, just in case.
     const cookieStore = cookies();
@@ -77,10 +77,12 @@ export async function GET() {
   const cookieStore = cookies();
 
   const chatUnlocked = cookieStore.has("chatUnlocked");
+  const chat = cookieStore.get("chatUnlocked")?.value
   const interviewUnlocked = cookieStore.has("interviewUnlocked");
+  const interview = cookieStore.get("interviewUnlocked")?.value
 
   return NextResponse.json({
-    chatUnlocked: chatUnlocked,
-    interviewUnlocked: interviewUnlocked,
+    chatUnlocked: chatUnlocked ? chat : false,
+    interviewUnlocked: interviewUnlocked ? interview : false,
   } as passwordProtectionStatus);
 }

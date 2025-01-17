@@ -7,3 +7,4 @@ export {
   updateHistory,
 } from "./functions/chat-history";
 export { displayTime } from "./functions/time-display";
+export { cookieStatus } from "./functions/cookie-fetcher";

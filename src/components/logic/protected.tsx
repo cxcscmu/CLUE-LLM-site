@@ -11,6 +11,7 @@ import {
   redirector,
 } from "@interfaces";
 import { useRouter } from "next/navigation";
+import { cookieStatus } from "@utils";
 // Adding to the pages that are protected needs to be done in the password router. These imports make it possible for this component to be generic, by guaranteeing that the cookieName is one of the keys of passwordProtectionStatus.
 
 export const Protected: FC<{
@@ -33,10 +34,8 @@ export const Protected: FC<{
 
   useEffect(() => {
     const fetchLockedStatus = async () => {
-      const response = await fetch("api/password");
-      const pages: passwordProtectionStatus = await response.json();
-
-      setAccessible(pages[cookieName]);
+      const cookie = await cookieStatus(cookieName)
+      setAccessible(Boolean(cookie));
 
       // This makes sure that the redirect gets changed if you have the password (while not changing it if you don't.)
       if (accessible && redirect) {

@@ -7,8 +7,8 @@ export interface redirector {
 }
 
 export interface passwordProtectionStatus {
-  chatUnlocked: boolean;
-  interviewUnlocked: boolean;
+  chatUnlocked: string | boolean;
+  interviewUnlocked: string | boolean;
 }
 
 export type passwordProtectionCookie = "chatUnlocked" | "interviewUnlocked";

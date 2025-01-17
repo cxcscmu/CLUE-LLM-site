@@ -8,8 +8,8 @@ import { ArrowBigRightDash } from "lucide-react";
 import clsx from "clsx";
 
 import { Chatlog, ChatMessage, Selector, Timer } from "@logic";
-import { displayTime, getHistory, setHistory } from "@utils";
-import { conversation } from "@interfaces";
+import { getHistory, setHistory } from "@utils";
+import { conversation, passwordProtectionCookie } from "@interfaces";
 import { FunctionButton, Subtitle } from "@ui";
 import { sessionModels } from "@utils";
 
@@ -22,14 +22,16 @@ export const Conversation: FC<{
   skipMessage?: string;
   skipFunction?: MouseEventHandler;
   setLLM?: (value: string) => void;
+  skipCookieName?: passwordProtectionCookie
 }> = ({
   placeholder = "Type here...",
   system,
   logLabel,
   initialMessages = [],
-  skipAccessTime,
+  skipAccessTime = 0,
   skipMessage,
   skipFunction,
+  skipCookieName,
 }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages: initialMessages as Message[],
@@ -84,7 +86,7 @@ export const Conversation: FC<{
   if (skipMessage && skipFunction) {
     skip = (
       <label className="flex">
-        <p
+        <div
           className={clsx(
             "my-auto ml-auto mr-1 text-xs text-right select-none opacity-50",
             "text-zinc-500",
@@ -97,11 +99,12 @@ export const Conversation: FC<{
         >
           {/* {buttonMessage} */}
           <Timer
-            maxTime={skipAccessTime ? skipAccessTime : 0}
+            maxTime={skipAccessTime}
             timerDone={setTimerDone}
-            skipMessage={skipMessage ? skipMessage : undefined}
+            skipMessage={skipMessage}
+            cookieName={skipCookieName}
           ></Timer>
-        </p>
+        </div>
         <FunctionButton
           onClick={skipFunction}
           disabled={

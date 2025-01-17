@@ -78,6 +78,7 @@ export default function Home() {
             skipAccessTime={600}
             skipMessage="You may now end the interview, if it's complete."
             skipFunction={endInterview}
+            skipCookieName="interviewUnlocked"
           />
           {/* Contains the chatlog and message-sending components. */}
           <Footer />

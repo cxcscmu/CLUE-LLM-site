@@ -2,20 +2,23 @@
 
 import { FC, useEffect, useRef, useState } from "react";
 
-import { displayTime } from "@utils";
+import { cookieStatus, displayTime } from "@utils";
+import { passwordProtectionCookie } from "@interfaces";
 
 export const Timer: FC<{
   maxTime: number;
   timerDone: Function;
   skipMessage?: string;
-}> = ({maxTime, timerDone, skipMessage="You may now end the conversation."}) => {
+  cookieName?: passwordProtectionCookie;
+}> = ({maxTime, timerDone, skipMessage="You may now end the conversation.", cookieName}) => {
   const [time, setTime] = useState(maxTime);
-  const startTime = Date.now();
   const [display, setDisplay] = useState(`You may end the conversation in ${displayTime(time)}`);
   let timerRef = useRef<number | null>(null);
+  let startTime = Date.now();
 
   useEffect(() => {
-    const updateTimer = () => {
+    const updateTimer = async () => {
+      startTime = cookieName ? await cookieStatus(cookieName) as number : startTime
       const timeSince = Math.floor((Date.now() - startTime) / 1000);
       const newTime = maxTime - timeSince;
       setTime(newTime);

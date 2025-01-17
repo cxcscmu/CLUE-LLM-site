@@ -11,7 +11,7 @@ import { Footer, Logo, FAQ, Centered, Stacked } from "@ui";
 async function toNextPage() {
   // It sets the interviewUnlocked cookie to make the interview page accessible.
   await fetch("api/password", {
-    method: "Put",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -19,7 +19,7 @@ async function toNextPage() {
       cookieName: "interviewUnlocked",
       cookieOperation: "set",
       cookieTime: 900,
-      cookieValue: "true",
+      cookieValue: Date.now().toString(),
     }),
   });
   // Then it deletes the chatUnlocked cookie, making this page inaccessible.
@@ -56,6 +56,7 @@ export default function Home() {
             skipAccessTime={600}
             skipMessage="You may now end the conversation early, if you wish."
             skipFunction={toNextPage}
+            skipCookieName="chatUnlocked"
           />
           <Footer />
           <FAQ />
