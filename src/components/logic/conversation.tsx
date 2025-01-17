@@ -22,7 +22,7 @@ export const Conversation: FC<{
   skipMessage?: string;
   skipFunction?: MouseEventHandler;
   setLLM?: (value: string) => void;
-  skipCookieName?: passwordProtectionCookie
+  skipCookieName?: passwordProtectionCookie;
 }> = ({
   placeholder = "Type here...",
   system,

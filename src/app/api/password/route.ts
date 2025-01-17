@@ -77,9 +77,9 @@ export async function GET() {
   const cookieStore = cookies();
 
   const chatUnlocked = cookieStore.has("chatUnlocked");
-  const chat = cookieStore.get("chatUnlocked")?.value
+  const chat = cookieStore.get("chatUnlocked")?.value;
   const interviewUnlocked = cookieStore.has("interviewUnlocked");
-  const interview = cookieStore.get("interviewUnlocked")?.value
+  const interview = cookieStore.get("interviewUnlocked")?.value;
 
   return NextResponse.json({
     chatUnlocked: chatUnlocked ? chat : false,

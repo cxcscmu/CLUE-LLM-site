@@ -10,16 +10,27 @@ export const Timer: FC<{
   timerDone: Function;
   skipMessage?: string;
   cookieName?: passwordProtectionCookie;
-}> = ({maxTime, timerDone, skipMessage="You may now end the conversation.", cookieName}) => {
+}> = ({
+  maxTime,
+  timerDone,
+  skipMessage = "You may now end the conversation.",
+  cookieName,
+}) => {
   const [time, setTime] = useState(maxTime);
-  const [display, setDisplay] = useState(`You may end the conversation in ${displayTime(time)}`);
+  const [display, setDisplay] = useState(
+    `You may end the conversation in ${displayTime(time)}`,
+  );
   let timerRef = useRef<number | null>(null);
-  let startTime = 0;
+  const [startTime, setStartTime] = useState(0);
 
   useEffect(() => {
     const updateTimer = async () => {
-      if ( !startTime ) {
-        startTime = cookieName ? await cookieStatus(cookieName) as number : Date.now();
+      if (!startTime) {
+        setStartTime(
+          cookieName
+            ? ((await cookieStatus(cookieName)) as number)
+            : Date.now(),
+        );
       }
       const timeSince = Math.floor((Date.now() - startTime) / 1000);
       const newTime = maxTime - timeSince;
@@ -28,19 +39,19 @@ export const Timer: FC<{
       // console.log(newTime)
 
       if (time) {
-        setDisplay(`You may end the conversation in ${displayTime(newTime)}`)
+        setDisplay(`You may end the conversation in ${displayTime(newTime)}`);
         timerRef.current = requestAnimationFrame(updateTimer);
         timerDone(false);
       } else {
         setDisplay(skipMessage);
         timerDone(true);
-      };
-    }
+      }
+    };
 
     timerRef.current = requestAnimationFrame(updateTimer);
 
     return () => cancelAnimationFrame(timerRef.current as number);
-  }, []);
+  });
 
-  return <div>{display}</div>
-}
+  return <div>{display}</div>;
+};
