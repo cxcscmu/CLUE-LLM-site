@@ -14,15 +14,15 @@ const OPENAI_GPT_4o_mini: selection = {
 
 // Models from Anthropic
 const Anthropic_Claude_Sonnet: selection = {
-  value: "claude-3-5-sonnet-20241022",
+  value: "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
   label: "Anthropic: Claude 3.5 Sonnet",
 };
 const Anthropic_Claude_Haiku: selection = {
-  value: "claude-3-5-haiku-20241022",
+  value: "us.anthropic.claude-3-5-haiku-20241022-v1:0",
   label: "Anthropic: Claude 3.5 Haiku",
 };
 const Anthropic_Claude_Opus: selection = {
-  value: "claude-3-5-opus-20240229",
+  value: "us.anthropic.claude-3-opus-20240229-v1:0",
   label: "Anthropic: Claude 3.5 Opus",
 };
 
@@ -40,6 +40,26 @@ const Gemini_1_5_Pro: selection = {
   label: "Google: Gemini 1.5 Pro",
 };
 
+// Models from Meta
+const Llama3_3_70b_Instruct: selection = {
+  value: "us.meta.llama3-3-70b-instruct-v1:0",
+  label: "Meta: Llama 3.3 70b Instruct",
+};
+
+// Models from Amazon
+const Amazon_Nova_Pro: selection = {
+  value: "amazon.nova-pro-v1:0",
+  label: "Amazon: Nova Pro",
+};
+const Amazon_Nova_Lite: selection = {
+  value: "amazon.nova-lite-v1:0",
+  label: "Amazon: Nova Lite",
+};
+const Amazon_Nova_Micro: selection = {
+  value: "amazon.nova-micro-v1:0",
+  label: "Amazon: Nova Micro",
+};
+
 // Other companies
 const Deepseek_V3: selection = {
   value: "deepseek-chat",
@@ -52,9 +72,18 @@ export const sessionModels: selection[] = [
   Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
   Deepseek_V3,
+  Llama3_3_70b_Instruct,
+  Amazon_Nova_Pro,
+  Amazon_Nova_Lite,
+  Amazon_Nova_Micro,
 ];
 
 export const interviewModels: selection[] = [
   OPENAI_GPT_4o,
   // Anthropic_Claude_Sonnet,
+  // Anthropic_Claude_Sonnet,
+  // Llama3_3_70b_Instruct,
+  // Amazon_Nova_Pro,
+  // Amazon_Nova_Lite,
+  // Amazon_Nova_Micro,
 ];
