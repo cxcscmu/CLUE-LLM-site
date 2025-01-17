@@ -7,7 +7,7 @@ import { useChat } from "ai/react";
 import { ArrowBigRightDash } from "lucide-react";
 import clsx from "clsx";
 
-import { Chatlog, ChatMessage, Selector } from "@logic";
+import { Chatlog, ChatMessage, Selector, Timer } from "@logic";
 import { displayTime, getHistory, setHistory } from "@utils";
 import { conversation } from "@interfaces";
 import { FunctionButton, Subtitle } from "@ui";
@@ -61,44 +61,19 @@ export const Conversation: FC<{
 
       setHistory(newHist);
 
-      await fetch("/api/history", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newHist: newHist }),
-      });
+      // await fetch("/api/history", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ newHist: newHist }),
+      // });
     };
 
     updateHist();
   }, [messages, LLM, logLabel]);
 
-  const [buttonCounter, setButtonCounter] = useState<number>(
-    skipAccessTime ? skipAccessTime : 0,
-  );
-  const [buttonMessage, setButtonMessage] = useState<string>(
-    `You may end the conversation in ${displayTime(buttonCounter)}`,
-  );
-  useEffect(() => {
-    const updateTimer = () => {
-      if (buttonCounter) {
-        setButtonCounter(buttonCounter - 1);
-        setButtonMessage(
-          `You may end the conversation in ${displayTime(buttonCounter)}`,
-        );
-      } else {
-        setButtonMessage(
-          skipMessage ? skipMessage : "You may now end the conversation.",
-        );
-      }
-    };
-
-    const intervalID = setInterval(() => {
-      updateTimer();
-    }, 1000);
-
-    return () => clearInterval(intervalID);
-  });
+  const [timerDone, setTimerDone] = useState(false);
 
   const modelVars = {
     model: LLM,
@@ -120,14 +95,19 @@ export const Conversation: FC<{
             },
           )}
         >
-          {buttonMessage}
+          {/* {buttonMessage} */}
+          <Timer
+            maxTime={skipAccessTime ? skipAccessTime : 0}
+            timerDone={setTimerDone}
+            skipMessage={skipMessage ? skipMessage : undefined}
+          ></Timer>
         </p>
         <FunctionButton
           onClick={skipFunction}
           disabled={
             process.env.NODE_ENV != "development" &&
             (Boolean(messages.length <= initialMessages.length + 1) ||
-              Boolean(buttonCounter))
+              !Boolean(timerDone))
           }
           labeled={false}
         >
