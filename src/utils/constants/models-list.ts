@@ -68,22 +68,17 @@ const Deepseek_V3: selection = {
 
 export const sessionModels: selection[] = [
   OPENAI_GPT_4o,
-  // Anthropic_Claude_Sonnet,
   Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
   Deepseek_V3,
   Llama3_3_70b_Instruct,
+  Anthropic_Claude_Sonnet,
   Amazon_Nova_Pro,
-  Amazon_Nova_Lite,
-  Amazon_Nova_Micro,
 ];
 
 export const interviewModels: selection[] = [
   OPENAI_GPT_4o,
   // Anthropic_Claude_Sonnet,
-  // Anthropic_Claude_Sonnet,
   // Llama3_3_70b_Instruct,
   // Amazon_Nova_Pro,
-  // Amazon_Nova_Lite,
-  // Amazon_Nova_Micro,
 ];
