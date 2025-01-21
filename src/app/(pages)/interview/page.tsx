@@ -63,12 +63,6 @@ export default function Home() {
         <Logo />
         <Stacked>
           <Subtitle>Be interviewed about the previous conversation.</Subtitle>
-          <Selector
-            label="Select Model:"
-            values={interviewModels}
-            target={LLM}
-            setFunc={setLLM}
-          />
           {/* Lets you pick the LLM to use, if in a dev environment, and otherwise sets it randomly. */}
           <Conversation
             placeholder="Respond here."
@@ -79,6 +73,7 @@ export default function Home() {
             skipMessage="You may now end the interview, if it's complete."
             skipFunction={endInterview}
             skipCookieName="interviewUnlocked"
+            modelsList={interviewModels}
           />
           {/* Contains the chatlog and message-sending components. */}
           <Footer />

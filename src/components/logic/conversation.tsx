@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 import { Chatlog, ChatMessage, Selector, Timer } from "@logic";
 import { getHistory, setHistory } from "@utils";
-import { conversation, passwordProtectionCookie } from "@interfaces";
+import { conversation, passwordProtectionCookie, selection } from "@interfaces";
 import { FunctionButton, Subtitle } from "@ui";
 import { sessionModels } from "@utils";
 
@@ -17,15 +17,16 @@ export const Conversation: FC<{
   placeholder?: string;
   system?: string;
   logLabel: "session" | "interview";
+  modelsList: selection[];
   initialMessages?: CoreMessage[];
   skipAccessTime?: number;
   skipMessage?: string;
   skipFunction?: MouseEventHandler;
-  setLLM?: (value: string) => void;
   skipCookieName?: passwordProtectionCookie;
 }> = ({
   placeholder = "Type here...",
   system,
+  modelsList,
   logLabel,
   initialMessages = [],
   skipAccessTime = 0,
@@ -143,7 +144,7 @@ export const Conversation: FC<{
           {/* Contains the chatlog and message-sending components. */}
           <Selector
             label="Model:"
-            values={sessionModels}
+            values={modelsList}
             target={LLM}
             setFunc={setLLM}
           />

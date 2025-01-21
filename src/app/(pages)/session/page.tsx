@@ -6,6 +6,7 @@ import React from "react";
 import { redirector } from "@interfaces";
 import { Conversation, Protected } from "@logic";
 import { Footer, Logo, FAQ, Centered, Stacked } from "@ui";
+import { sessionModels } from "@utils";
 
 // This function is called by <Protected> when the page is locked after having been accessible.
 async function toNextPage() {
@@ -57,6 +58,7 @@ export default function Home() {
             skipMessage="You may now end the conversation early, if you wish."
             skipFunction={toNextPage}
             skipCookieName="chatUnlocked"
+            modelsList={sessionModels}
           />
           <Footer />
           <FAQ />
