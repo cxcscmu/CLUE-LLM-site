@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 
 import { redirector } from "@interfaces";
-import { Conversation, Protected, Selector } from "@logic";
+import { Conversation, Protected } from "@logic";
 import { Footer, Subtitle, Logo, FAQ, Centered, Stacked } from "@ui";
 import {
   getHistory,
