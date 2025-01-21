@@ -64,13 +64,13 @@ export const Conversation: FC<{
 
       setHistory(newHist);
 
-      // await fetch("/api/history", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ newHist: newHist }),
-      // });
+      await fetch("/api/neon", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hist: newHist }),
+      });
     };
 
     updateHist();
