@@ -48,15 +48,15 @@ const Llama3_3_70b_Instruct: selection = {
 
 // Models from Amazon
 const Amazon_Nova_Pro: selection = {
-  value: "amazon.nova-pro-v1:0",
+  value: "us.amazon.nova-pro-v1:0",
   label: "Amazon: Nova Pro",
 };
 const Amazon_Nova_Lite: selection = {
-  value: "amazon.nova-lite-v1:0",
+  value: "us.amazon.nova-lite-v1:0",
   label: "Amazon: Nova Lite",
 };
 const Amazon_Nova_Micro: selection = {
-  value: "amazon.nova-micro-v1:0",
+  value: "us.amazon.nova-micro-v1:0",
   label: "Amazon: Nova Micro",
 };
 
