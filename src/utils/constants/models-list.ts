@@ -22,7 +22,7 @@ const Anthropic_Claude_Haiku: selection = {
   label: "Anthropic: Claude 3.5 Haiku",
 };
 const Anthropic_Claude_Opus: selection = {
-  value: "us.anthropic.claude-3-opus-20240229-v1:0",
+  value: "us.anthropic.claude-3-opus-20240229-v1:0", // may not work with current bedrock access gateway
   label: "Anthropic: Claude 3.5 Opus",
 };
 
@@ -73,7 +73,7 @@ export const sessionModels: selection[] = [
   Deepseek_V3,
   Llama3_3_70b_Instruct,
   Anthropic_Claude_Sonnet,
-  Amazon_Nova_Pro,
+  // Amazon_Nova_Pro,
 ];
 
 export const interviewModels: selection[] = [
