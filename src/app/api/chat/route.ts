@@ -106,9 +106,9 @@ export async function POST(req: Request) {
     case "us.anthropic.claude-3-opus-20240229-v1:0":
     case "us.anthropic.claude-3-5-haiku-20241022-v1:0":
     case "us.anthropic.claude-3-5-sonnet-20241022-v2:0":
-    case "amazon.nova-pro-v1:0":
-    case "amazon.nova-lite-v1:0":
-    case "amazon.nova-micro-v1:0":
+    case "us.amazon.nova-pro-v1:0":
+    case "us.amazon.nova-lite-v1:0":
+    case "us.amazon.nova-micro-v1:0":
       const bedrock_api = process.env.BEDROCK_API_KEY;
       const bedrock = createOpenAI({
         baseURL: process.env.BEDROCK_BASE_URL,
