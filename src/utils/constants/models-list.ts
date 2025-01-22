@@ -71,9 +71,9 @@ export const sessionModels: selection[] = [
   Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
   Deepseek_V3,
-  // Llama3_3_70b_Instruct,
-  // Anthropic_Claude_Sonnet,
-  // Amazon_Nova_Pro,
+  Llama3_3_70b_Instruct,
+  Anthropic_Claude_Sonnet,
+  Amazon_Nova_Pro,
 ];
 
 export const interviewModels: selection[] = [
