@@ -3,6 +3,7 @@
 "use client";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 import { Loader, Logo } from "@ui";
 import { passwordProtectionCookie, redirector } from "@interfaces";
@@ -77,7 +78,8 @@ export const Protected: FC<{
             text-zinc-500
             dark:text-zinc-400"
           >
-            {reportText} <br />
+            <ReactMarkdown>{reportText}</ReactMarkdown>
+            <br />
             <Link href={nextPage} className="underline">
               {nextPageText}
             </Link>

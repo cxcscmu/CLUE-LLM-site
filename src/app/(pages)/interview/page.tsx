@@ -50,8 +50,8 @@ export default function Home() {
 
   // The <protected> component takes this as an argument to display that text after the cookie expires. The function gets run a single time after it expires.
   const redirect: redirector = {
-    reportText:
-      "Your interview session has expired. You may now close the page.",
+    reportText: `Your interview session has expired. Paste your unique password \n 
+      limited158lapdog258mystique \n into Qualtrics. You may now close the page.`,
     nextPage: "/",
     nextPageText: "",
     func: neonCaller, // Defined above.
