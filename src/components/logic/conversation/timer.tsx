@@ -38,7 +38,7 @@ export const Timer: FC<{
 
       // console.log(newTime)
 
-      if (time) {
+      if (time >= 0) {
         setDisplay(`You may end the conversation in ${displayTime(newTime)}`);
         timerRef.current = requestAnimationFrame(updateTimer);
         timerDone(false);
