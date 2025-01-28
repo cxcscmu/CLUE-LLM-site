@@ -70,7 +70,7 @@ export const sessionModels: selection[] = [
   OPENAI_GPT_4o,
   Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
-  Deepseek_V3,
+  // Deepseek_V3,
   Llama3_3_70b_Instruct,
   Anthropic_Claude_Sonnet,
   // Amazon_Nova_Pro,
