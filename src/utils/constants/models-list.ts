@@ -62,17 +62,25 @@ const Amazon_Nova_Micro: selection = {
 
 // Other companies
 const Deepseek_V3: selection = {
-  value: "deepseek-chat",
-  label: "Deepseek V3",
+  value: "deepseek-ai/DeepSeek-V3", // on togetherai
+  label: "DeepSeek V3",
+};
+
+const Deepseek_R1: selection = {
+  // value: "deepseek-reasoner"
+  value: "deepseek-ai/DeepSeek-R1", // on togetherai
+  label: "DeepSeek R1",
 };
 
 export const sessionModels: selection[] = [
-  OPENAI_GPT_4o,
-  Gemini_1_5_Flash,
+  // OPENAI_GPT_4o,
+  // Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
-  // Deepseek_V3,
-  Llama3_3_70b_Instruct,
-  Anthropic_Claude_Sonnet,
+  // Llama3_3_70b_Instruct,
+  // Anthropic_Claude_Sonnet,
+  Deepseek_R1,
+  Deepseek_V3,
+
   // Amazon_Nova_Pro,
 ];
 
