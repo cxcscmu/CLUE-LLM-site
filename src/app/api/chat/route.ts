@@ -9,7 +9,7 @@ import { LanguageModel, streamText } from "ai";
 // import { z } from "zod";
 
 // Helps prevent the request from timing out.
-export const maxDuration = 30;
+export const maxDuration = 300;
 
 // const historyTool = tool({
 //   description:
