@@ -12,3 +12,5 @@ export { Stacked } from "./structure/stacked";
 
 export { FunctionButton } from "./function-button";
 export { Subtitle } from "./subtitle";
+
+export { Accordion, AccordionItem } from "./accordion";

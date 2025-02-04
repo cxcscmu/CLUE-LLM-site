@@ -4,11 +4,12 @@
 
 import { createOpenAI, openai } from "@ai-sdk/openai";
 import { google } from "@ai-sdk/google";
-import { streamText } from "ai";
+import { createTogetherAI } from '@ai-sdk/togetherai';
+import { LanguageModel, streamText } from "ai";
 // import { z } from "zod";
 
 // Helps prevent the request from timing out.
-export const maxDuration = 30;
+export const maxDuration = 300;
 
 // const historyTool = tool({
 //   description:
@@ -89,6 +90,7 @@ export async function POST(req: Request) {
       break;
     // Models with various custom SDKs
     case "deepseek-chat":
+    case "deepseek-reasoner":
       const deepseek_api = process.env.DEEPSEEK_API_KEY;
       const deepseek = createOpenAI({
         baseURL: "https://api.deepseek.com",
@@ -96,6 +98,19 @@ export async function POST(req: Request) {
       });
       result = streamText({
         model: deepseek(model),
+        messages: messages,
+        tools: interviewTool,
+        system: system,
+        maxSteps: maxSteps,
+      });
+      break;
+    case "deepseek-ai/DeepSeek-R1":
+    case "deepseek-ai/DeepSeek-V3":
+      const togetherai = createTogetherAI({
+        apiKey: process.env.TOGETHER_AI_API_KEY,
+      })
+      result = streamText({
+        model: togetherai(model) as LanguageModel,
         messages: messages,
         tools: interviewTool,
         system: system,
