@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { Message } from "ai";
 import ReactMarkdown from "react-markdown";
@@ -7,6 +7,12 @@ import Image from "next/image";
 import { Accordion, AccordionItem } from "@ui";
 
 export const Chatlog: FC<{ chatLog: Message[] }> = ({ chatLog }) => {
+  const chatEndRef = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatLog]);
+
   if (chatLog.length) {
     return (
       <div
@@ -81,6 +87,7 @@ export const Chatlog: FC<{ chatLog: Message[] }> = ({ chatLog }) => {
             </div>
           );
         })}
+        <div ref={chatEndRef}></div>
       </div>
     );
   }
