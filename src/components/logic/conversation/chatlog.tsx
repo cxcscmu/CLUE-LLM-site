@@ -69,7 +69,7 @@ export const Chatlog: FC<{ chatLog: Message[] }> = ({ chatLog }) => {
                       <Accordion type="single" collapsible>
                         <AccordionItem value={`Reasoning`} className="min-w-16">
                           <div className="px-5 py-2 text-sm bg-zinc-100 dark:bg-zinc-800 rounded-xl">
-                            <ReactMarkdown>{reasoning}</ReactMarkdown>
+                            {reasoning}
                           </div>
                         </AccordionItem>
                       </Accordion>
