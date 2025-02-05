@@ -17,28 +17,43 @@ export async function POST(req: Request) {
     });
     await client.connect();
 
+    // const query = `
+    //     INSERT INTO clue_llm."ChatOnlyConversations" (
+    //       worker_id,
+    //       session_model,
+    //       session,
+    //       session_start,
+    //       session_end,
+    //       interview_model,
+    //       interview,
+    //       interview_start,
+    //       interview_end)
+    //     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    //     ON CONFLICT (worker_id, session_start)
+    //       DO UPDATE SET
+    //         session_model = EXCLUDED.session_model,
+    //         session = EXCLUDED.session,
+    //         session_start = EXCLUDED.session_start,
+    //         session_end = EXCLUDED.session_end,
+    //         interview_model = EXCLUDED.interview_model,
+    //         interview = EXCLUDED.interview,
+    //         interview_start = EXCLUDED.interview_start,
+    //         interview_end = EXCLUDED.interview_end
+    //     RETURNING uid;
+    // `;
     const query = `
-        INSERT INTO clue_llm."Conversations" (
+        INSERT INTO clue_llm."ChatOnlyConversations" (
           worker_id,
           session_model,
           session,
           session_start,
-          session_end,
-          interview_model,
-          interview,
-          interview_start,
-          interview_end)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+          session_end)
+        VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT (worker_id, session_start)
           DO UPDATE SET
             session_model = EXCLUDED.session_model,
             session = EXCLUDED.session,
-            session_start = EXCLUDED.session_start,
-            session_end = EXCLUDED.session_end,
-            interview_model = EXCLUDED.interview_model,
-            interview = EXCLUDED.interview,
-            interview_start = EXCLUDED.interview_start,
-            interview_end = EXCLUDED.interview_end
+            session_end = EXCLUDED.session_end
         RETURNING uid;
     `;
     const values = [
@@ -47,10 +62,6 @@ export async function POST(req: Request) {
       JSON.stringify(hist.session),
       hist.sessionStart,
       hist.sessionEnd,
-      hist.interviewModel,
-      JSON.stringify(hist.interview),
-      hist.interviewStart,
-      hist.interviewEnd,
     ];
     const result = await client.query(query, values);
 

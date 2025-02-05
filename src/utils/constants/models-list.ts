@@ -73,11 +73,11 @@ const Deepseek_R1: selection = {
 };
 
 export const sessionModels: selection[] = [
-  // OPENAI_GPT_4o,
-  // Gemini_1_5_Flash,
+  OPENAI_GPT_4o,
+  Gemini_1_5_Flash,
   // Gemini_2_0_Flash,
-  // Llama3_3_70b_Instruct,
-  // Anthropic_Claude_Sonnet,
+  Llama3_3_70b_Instruct,
+  Anthropic_Claude_Sonnet,
   Deepseek_R1,
   Deepseek_V3,
 
