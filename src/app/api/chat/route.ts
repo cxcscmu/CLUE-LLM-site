@@ -4,7 +4,7 @@
 
 import { createOpenAI, openai } from "@ai-sdk/openai";
 import { google } from "@ai-sdk/google";
-import { createTogetherAI } from '@ai-sdk/togetherai';
+import { createTogetherAI } from "@ai-sdk/togetherai";
 import { LanguageModel, streamText } from "ai";
 // import { z } from "zod";
 
@@ -108,7 +108,7 @@ export async function POST(req: Request) {
     case "deepseek-ai/DeepSeek-V3":
       const togetherai = createTogetherAI({
         apiKey: process.env.TOGETHER_AI_API_KEY,
-      })
+      });
       result = streamText({
         model: togetherai(model) as LanguageModel,
         messages: messages,
