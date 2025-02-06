@@ -25,7 +25,7 @@ export const FAQ: FC<{}> = () => {
             CLUE - which stands for Chatbot-Led User Experience interviews - is
             a research project being conducted at CMU. For this project, we ask
             that participants engage with a chatbot for 10-15 minutes, then
-            participate in a follow-up interview about the initial conversation.
+            participate in a follow-up survey about the initial conversation.
           </p>
           <p>
             To begin, {"you'll"} first need to login using your Mechanical Turk
@@ -44,7 +44,7 @@ export const FAQ: FC<{}> = () => {
             end the conversation early, it will automatically redirect you to
             the next page after 15 minutes.
           </p>
-          <p>
+          {/* <p>
             In the final page of the project, you will speak with a virtual
             interviewer for 10-15 minutes. Here, the interviewer will send the
             first message, and should be leading the conversation. Once again,
@@ -53,10 +53,10 @@ export const FAQ: FC<{}> = () => {
             <ArrowBigRightDash className="inline" /> button to conclude the
             interview. If you are told that the interview is over before the
             button is available, wait until it is.
-          </p>
+          </p> */}
           <p>
             <strong>
-              PLEASE DO NOT CLOSE THE WINDOW UNTIL THE INTERVIEW HAS BEEN ENDED
+              PLEASE DO NOT CLOSE THE WINDOW UNTIL THE CHAT HAS BEEN ENDED
               BY CLICKING THE BUTTON.
             </strong>
           </p>
