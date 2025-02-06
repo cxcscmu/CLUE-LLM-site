@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     await client.connect();
 
     const query = `
-        INSERT INTO clue_llm."ChatOnlyConversations" (
+        INSERT INTO clue_llm."Conversations" (
           worker_id,
           session_model,
           session,
