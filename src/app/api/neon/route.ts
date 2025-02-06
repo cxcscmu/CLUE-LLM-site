@@ -62,10 +62,10 @@ export async function POST(req: Request) {
       JSON.stringify(hist.session),
       hist.sessionStart,
       hist.sessionEnd,
-      hist.interview_model,
+      hist.interviewModel,
       JSON.stringify(hist.interview),
-      hist.interview_start,
-      hist.interview_end
+      hist.interviewStart,
+      hist.interviewEnd
     ];
     const result = await client.query(query, values);
 

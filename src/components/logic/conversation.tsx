@@ -11,7 +11,6 @@ import { Chatlog, ChatMessage, Selector, Timer } from "@logic";
 import { getHistory, setHistory } from "@utils";
 import { conversation, passwordProtectionCookie, selection } from "@interfaces";
 import { FunctionButton, Subtitle } from "@ui";
-import { sessionModels } from "@utils";
 
 export const Conversation: FC<{
   placeholder?: string;
@@ -38,7 +37,7 @@ export const Conversation: FC<{
     initialMessages: initialMessages as Message[],
   });
 
-  const [LLM, setLLM] = useState(sessionModels[0].value);
+  const [LLM, setLLM] = useState(modelsList[0].value);
 
   useEffect(() => {
     const updateHist = async () => {

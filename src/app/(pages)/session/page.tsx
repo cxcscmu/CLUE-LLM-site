@@ -37,34 +37,34 @@ async function toNextPage() {
   });
 }
 
-async function neonCaller() {
-  // After fetching a copy of the chat history, it submits it to the NEON database.
-  const hist = getHistory();
-  const response = await fetch("api/neon", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ hist: hist }),
-  });
-  // It submits the response to the logs in case of errors.
-  const { message } = await response.json();
-  console.log(message);
-}
+// async function neonCaller() {
+//   // After fetching a copy of the chat history, it submits it to the NEON database.
+//   const hist = getHistory();
+//   const response = await fetch("api/neon", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ hist: hist }),
+//   });
+//   // It submits the response to the logs in case of errors.
+//   const { message } = await response.json();
+//   console.log(message);
+// }
 
-async function endChat() {
-  // It deletes the interviewUnlocked cookie, making the page inaccessible.
-  const response = await fetch("api/password", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      cookieName: "chatUnlocked",
-      cookieOperation: "delete",
-    }),
-  });
-}
+// async function endChat() {
+//   // It deletes the interviewUnlocked cookie, making the page inaccessible.
+//   const response = await fetch("api/password", {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       cookieName: "chatUnlocked",
+//       cookieOperation: "delete",
+//     }),
+//   });
+// }
 
 export default function Home() {
   // The <protected> component takes this as an argument to display that text after the cookie expires. The function gets run a single time after it expires, then it automatically navigates to nextPage.
